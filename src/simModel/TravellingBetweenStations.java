@@ -46,11 +46,9 @@ public class TravellingBetweenStations extends SequelActivity {
 		// System.out.println("TravellingBetweenStations==terminatingEvent==start");//TODO
 		// RCG.Trains[ID].status = ARRIVED
 		int nextId = (this.id + 1) % 4;
-		if (null != iTrain
-				&& park.tracks.trackGroup[nextId].trainGroup.size() > 0) {
+		if (iTrain != null && park.tracks.trackGroup[nextId].trainGroup.size() > 0) {
 			Train t;
-			for (int i = 0; i < park.tracks.trackGroup[nextId].trainGroup
-					.size(); i++) {
+			for (int i = 0; i < park.tracks.trackGroup[nextId].trainGroup.size(); i++) {
 				t = park.tracks.trackGroup[nextId].trainGroup.get(i);
 				// locate RCG.Trains[ID];
 				if (t.trainId == iTrain.trainId) {
