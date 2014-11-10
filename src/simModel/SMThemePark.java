@@ -2,13 +2,13 @@ package simModel;
 
 import java.util.ArrayList;
 
-import absmodJ.ExtSequelActivity;
-import absmodJ.SBNotice;
-import absmodJ.SequelActivity;
 import absmodJ.AOSimulationModel;
 import absmodJ.Behaviour;
 //
 // The Simulation model Class
+import absmodJ.ExtSequelActivity;
+import absmodJ.SBNotice;
+import absmodJ.SequelActivity;
 
 public class SMThemePark extends AOSimulationModel {
 	// Constants available from Constants class
@@ -104,6 +104,7 @@ public class SMThemePark extends AOSimulationModel {
 	/*
 	 * Testing preconditions
 	 */
+	@Override
 	protected void testPreconditions(Behaviour behObj) {
 		reschedule(behObj);
 
@@ -140,6 +141,7 @@ public class SMThemePark extends AOSimulationModel {
 		}
 	}
 
+	@Override
 	protected boolean implicitStopCondition() // termination explicit
 	{
 		// System.out.println("===SMThemePark===implicitStopCondition===start===");//TODO
@@ -168,6 +170,7 @@ public class SMThemePark extends AOSimulationModel {
 
 	}
 
+	@Override
 	protected void eventOccured() {
 		// this.showSBL();
 		// System.out.println("***Total events:"+this.output.getTotalEvent());
@@ -200,6 +203,7 @@ public class SMThemePark extends AOSimulationModel {
 		scheduleActivity(seqAct);
 	}
 
+	@Override
 	protected double getClock() {
 		return super.getClock();
 	}

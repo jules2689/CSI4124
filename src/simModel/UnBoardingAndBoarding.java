@@ -57,7 +57,7 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 		if (this.idList != null && this.idList.size() > 0) {
 			int id;
 			for (int k = 0; k < idList.size(); k++) {
-				id = ((Integer) idList.get(k)).intValue();// ID
+				id = idList.get(k).intValue();// ID
 				Track iTrack = park.tracks.trackGroup[id]; // RQ.Tracks[ID]
 				Train headTrain = iTrack.trainGroup.get(0);// RQ.Tracks[ID].Trains[0]
 				// RQ.Tracks[ID].Trains[0] = BOARDING
@@ -143,7 +143,7 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 		if (this.idList != null && this.idList.size() > 0) {
 			int id;
 			for (int k = 0; k < this.idList.size(); k++) {
-				id = ((Integer) idList.get(k)).intValue();// ID
+				id = idList.get(k).intValue();// ID
 				ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(
 						this.park, id);
 				// SP.Start(ExtraBoardingTime)
