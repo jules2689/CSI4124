@@ -140,6 +140,7 @@ class RVPs {
 		return (nxtArrival);
 	}
 
+	//TODO: Add to Documentation
 	protected double getMeanTime() {
 		double mean;
 
