@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import absmodJ.AOSimulationModel;
 import absmodJ.Behaviour;
-//
+
 // The Simulation model Class
 import absmodJ.ExtSequelActivity;
 import absmodJ.SBNotice;
@@ -213,8 +213,8 @@ public class SMThemePark extends AOSimulationModel {
 		boolean continueflag = true;
 
 		System.out.println("************With " + this.numberOfTrains
-				+ "Trains and " + this.numberOfCars
-				+ " cars totally ***************");
+				+ " Trains and " + this.numberOfCars
+				+ " cars in total ***************");
 		System.out.println("******PerctOfType4Scen: "
 				+ this.output.getPerctOfType4Scen());
 		System.out.println("******PerctOfType3Scen: "
@@ -229,7 +229,7 @@ public class SMThemePark extends AOSimulationModel {
 				&& this.output.getPerctOfType2Scen() <= 10) {
 			System.out.println("****Reach the goal with  "
 					+ this.numberOfTrains + " trains and " + this.numberOfCars
-					+ " cars totally.");
+					+ " cars in total.");
 			continueflag = false;
 		}
 

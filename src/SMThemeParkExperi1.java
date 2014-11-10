@@ -1,9 +1,8 @@
 // File: Experiment.java
 // Description:
 
-import simModel.SMThemePark;
-import simModel.Seeds;
-import cern.jet.random.engine.RandomSeedGenerator;
+import simModel.*;
+import cern.jet.random.engine.*;
 
 // Main Method: Experiments
 // 
@@ -25,8 +24,9 @@ class SMThemeParkExperi1 {
 
 		// Lets get a set of uncorrelated seeds
 		RandomSeedGenerator rsg = new RandomSeedGenerator();
-		for (i = 0; i < NUMRUNS; i++)
+		for (i = 0; i < NUMRUNS; i++) {
 			sds[i] = new Seeds(rsg);
+		}
 
 		// Loop for NUMRUN simulation runs for each case
 		// Case i
@@ -52,7 +52,7 @@ class SMThemeParkExperi1 {
 				// park.runSimulation();
 			}
 			// See examples for hints on collecting output
-			// and developping code for analysis
+			// and developing code for analysis
 
 		}
 	}
