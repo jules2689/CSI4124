@@ -1,5 +1,6 @@
 package simModel;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import absmodJ.AOSimulationModel;
@@ -212,24 +213,17 @@ public class SMThemePark extends AOSimulationModel {
 	public boolean checkContinue() {
 		boolean continueflag = true;
 
-		System.out.println("************With " + this.numberOfTrains
-				+ " Trains and " + this.numberOfCars
-				+ " cars in total ***************");
-		System.out.println("******PerctOfType4Scen: "
-				+ this.output.getPerctOfType4Scen());
-		System.out.println("******PerctOfType3Scen: "
-				+ this.output.getPerctOfType3Scen());
-		System.out.println("******PerctOfType2Scen: "
-				+ this.output.getPerctOfType2Scen());
-		System.out.println("******PerctOfType1Scen: "
-				+ this.output.getPerctOfType1Scen());
+		System.out.println("************With " + this.numberOfTrains + " Trains and " + this.numberOfCars + " cars in total ***************");
+		System.out.println("******PerctOfType4Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType4Scen()));
+		System.out.println("******PerctOfType3Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType3Scen()));
+		System.out.println("******PerctOfType2Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType2Scen()));
+		System.out.println("******PerctOfType1Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType1Scen()));
+		
+		double total = this.output.getPerctOfType4Scen() + this.output.getPerctOfType3Scen() + this.output.getPerctOfType2Scen() + this.output.getPerctOfType1Scen();
+		System.out.println("***TOTAL: " + total);
 
-		if (this.output.getPerctOfType4Scen() == 0
-				&& this.output.getPerctOfType3Scen() <= 5
-				&& this.output.getPerctOfType2Scen() <= 10) {
-			System.out.println("****Reach the goal with  "
-					+ this.numberOfTrains + " trains and " + this.numberOfCars
-					+ " cars in total.");
+		if (this.output.getPerctOfType4Scen() == 0 && this.output.getPerctOfType3Scen() <= 5 && this.output.getPerctOfType2Scen() <= 10) {
+			System.out.println("****Reach the goal with  " + this.numberOfTrains + " trains and " + this.numberOfCars + " cars in total.");
 			continueflag = false;
 		}
 
@@ -242,6 +236,11 @@ public class SMThemePark extends AOSimulationModel {
 
 		// System.out.println("check:" + continueflag);
 		return continueflag;
+	}
+	
+	//TODO Added Helper Method for Docs?
+	private String formatDoubleWithTwoPrecision(double decimal) {
+		return new DecimalFormat("#0.00").format(decimal);
 	}
 
 	// reset with increament of train

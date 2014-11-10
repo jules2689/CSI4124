@@ -59,18 +59,22 @@ class Output {
 	}
 
 	public double getPerctOfType1Scen() {
+		this.perctOfType1Scen = 100 * this.type1BoardingEvent / (double)this.totalEvent;
 		return this.perctOfType1Scen;
 	}
 
 	public double getPerctOfType2Scen() {
+		this.perctOfType2Scen = 100 * this.type2BoardingEvent / (double)this.totalEvent;
 		return this.perctOfType2Scen;
 	}
 
 	public double getPerctOfType3Scen() {
+		this.perctOfType3Scen = 100 * this.type3BoardingEvent / (double)this.totalEvent;
 		return this.perctOfType3Scen;
 	}
 
 	public double getPerctOfType4Scen() {
+		this.perctOfType4Scen = 100 * this.type4BoardingEvent / (double)this.totalEvent;
 		return this.perctOfType4Scen;
 	}
 
@@ -80,42 +84,18 @@ class Output {
 
 	public void setType1BoardingEvent(int type1BoardingEvent) {
 		this.type1BoardingEvent = type1BoardingEvent;
-		if (this.totalEvent != 0) {
-			this.perctOfType1Scen = 100 * this.type1BoardingEvent
-					/ this.totalEvent;
-		} else {
-			this.perctOfType1Scen = 0;
-		}
 	}
 
 	public void setType2BoardingEvent(int type2BoardingEvent) {
 		this.type2BoardingEvent = type2BoardingEvent;
-		if (this.totalEvent != 0) {
-			this.perctOfType2Scen = 100 * this.type2BoardingEvent
-					/ this.totalEvent;
-		} else {
-			this.perctOfType2Scen = 0;
-		}
 	}
 
 	public void setType3BoardingEvent(int type3BoardingEvent) {
 		this.type3BoardingEvent = type3BoardingEvent;
-		if (this.totalEvent != 0) {
-			this.perctOfType3Scen = 100 * this.type3BoardingEvent
-					/ this.totalEvent;
-		} else {
-			this.perctOfType3Scen = 0;
-		}
 	}
 
 	public void setType4BoardingEvent(int type4BoardingEvent) {
 		this.type4BoardingEvent = type4BoardingEvent;
-		if (this.totalEvent != 0) {
-			this.perctOfType4Scen = 100 * this.type4BoardingEvent
-					/ this.totalEvent;
-		} else {
-			this.perctOfType4Scen = 0;
-		}
 	}
 
 	// public void reset(){

@@ -81,17 +81,13 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 
 	protected void setOutputForStation(Station stn) {
 		if (stn.uNumCustomers == 0) {
-			park.output.setType1BoardingEvent(park.output
-					.getType1BoardingEvent() + 1);
+			park.output.setType1BoardingEvent(park.output.getType1BoardingEvent() + 1);
 		} else if (stn.uNumCustomers >= 1 && stn.uNumCustomers < 25) {
-			park.output.setType2BoardingEvent(park.output
-					.getType2BoardingEvent() + 1);
+			park.output.setType2BoardingEvent(park.output.getType2BoardingEvent() + 1);
 		} else if (stn.uNumCustomers >= 25 && stn.uNumCustomers < 50) {
-			park.output.setType3BoardingEvent(park.output
-					.getType3BoardingEvent() + 1);
+			park.output.setType3BoardingEvent(park.output.getType3BoardingEvent() + 1);
 		} else {
-			park.output.setType4BoardingEvent(park.output
-					.getType4BoardingEvent() + 1);
+			park.output.setType4BoardingEvent(park.output.getType4BoardingEvent() + 1);
 		}
 
 		park.output.setTotalEvent(park.output.getTotalEvent() + 1);
