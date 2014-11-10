@@ -49,8 +49,7 @@ public class SMThemePark extends AOSimulationModel {
 	protected double closingTime;
 
 	// Constructor
-	public SMThemePark(double t0time, double tftime, int nTrains, int nCars,
-			int boardingOption, boolean fixBoardingTime, Seeds sd) {
+	public SMThemePark(double t0time, double tftime, int nTrains, int nCars, int boardingOption, boolean fixBoardingTime, Seeds sd) {
 		// System.out.println("==SMThemePark==construct==start");//TODO
 		// Initialise parameters here
 		this.numberOfTrains = nTrains;
@@ -211,28 +210,30 @@ public class SMThemePark extends AOSimulationModel {
 
 	// check if satisfied
 	public boolean checkContinue() {
-		boolean continueflag = true;
-
-		System.out.println("************With " + this.numberOfTrains + " Trains and " + this.numberOfCars + " cars in total ***************");
-		System.out.println("******PerctOfType4Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType4Scen()));
-		System.out.println("******PerctOfType3Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType3Scen()));
-		System.out.println("******PerctOfType2Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType2Scen()));
-		System.out.println("******PerctOfType1Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType1Scen()));
+		boolean continueflag = this.numberOfTrains < 9;
 		
-		double total = this.output.getPerctOfType4Scen() + this.output.getPerctOfType3Scen() + this.output.getPerctOfType2Scen() + this.output.getPerctOfType1Scen();
-		System.out.println("***TOTAL: " + total);
-
-		if (this.output.getPerctOfType4Scen() == 0 && this.output.getPerctOfType3Scen() <= 5 && this.output.getPerctOfType2Scen() <= 10) {
-			System.out.println("****Reach the goal with  " + this.numberOfTrains + " trains and " + this.numberOfCars + " cars in total.");
-			continueflag = false;
+		if (continueflag) {
+			System.out.println("************With " + this.numberOfTrains + " Trains and " + this.numberOfCars + " cars in total ***************");
+			System.out.println("******PerctOfType4Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType4Scen()));
+			System.out.println("******PerctOfType3Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType3Scen()));
+			System.out.println("******PerctOfType2Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType2Scen()));
+			System.out.println("******PerctOfType1Scen: " + formatDoubleWithTwoPrecision(this.output.getPerctOfType1Scen()));
+			
+			double total = this.output.getPerctOfType4Scen() + this.output.getPerctOfType3Scen() + this.output.getPerctOfType2Scen() + this.output.getPerctOfType1Scen();
+			System.out.println("***TOTAL: " + total);
+	
+			if (this.output.getPerctOfType4Scen() == 0 && this.output.getPerctOfType3Scen() <= 5 && this.output.getPerctOfType2Scen() <= 10) {
+				System.out.println("****Reach the goal with  " + this.numberOfTrains + " trains and " + this.numberOfCars + " cars in total.");
+				continueflag = false;
+			}
+	
+			if (this.numberOfCars == 72) {
+				System.out.println("Could not reach the goal....");
+				continueflag = false;
+			}
+			
+			System.out.println("");
 		}
-
-		if (this.numberOfCars == 72) {
-			System.out.println("Could not reach the goal....");
-			continueflag = false;
-		}
-		
-		System.out.println("");
 
 		// System.out.println("check:" + continueflag);
 		return continueflag;
@@ -248,7 +249,7 @@ public class SMThemePark extends AOSimulationModel {
 		// System.out.println("==resetWithIncre start:"); //TODO delete
 		this.numberOfCars++;
 
-		if (this.numberOfCars > this.numberOfTrains * 8) { // if reach maximum
+		if (this.numberOfCars > this.numberOfTrains * 9) { // if reach maximum
 															// cars, increase
 															// train and restart
 															// with min cars
@@ -311,6 +312,17 @@ public class SMThemePark extends AOSimulationModel {
 				}
 			}
 		}
+	}
+	
+	// TODO method for debug DELETE
+	public double[] currentStats(){
+		double []results = new double[4];
+		results[0] = this.output.getPerctOfType1Scen();
+		results[1] = this.output.getPerctOfType2Scen();
+		results[2] = this.output.getPerctOfType3Scen();
+		results[3] = this.output.getPerctOfType4Scen();
+		
+		return results;
 	}
 
 }

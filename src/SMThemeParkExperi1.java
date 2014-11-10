@@ -29,9 +29,7 @@ class SMThemeParkExperi1 {
 		// Case i
 		for (i = 0; i < NUMRUNS; i++) {
 			System.out.println("==========Case " + i + "==========");
-			park = new SMThemePark(startTime, endTime, initialNumTrains,
-									initialNumCars, boardingOptions[i], fixBoardingTime[i],
-									sds[i]);
+			park = new SMThemePark(startTime, endTime, initialNumTrains, initialNumCars, boardingOptions[i], fixBoardingTime[i], sds[i]);
 			park.runSimulation();
 			// System.out.println("==main:check:====");
 			while (park.checkContinue()) {
