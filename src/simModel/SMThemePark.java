@@ -237,6 +237,8 @@ public class SMThemePark extends AOSimulationModel {
 			System.out.println("Could not reach the goal....");
 			continueflag = false;
 		}
+		
+		System.out.println("");
 
 		// System.out.println("check:" + continueflag);
 		return continueflag;

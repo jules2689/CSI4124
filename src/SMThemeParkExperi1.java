@@ -8,20 +8,17 @@ import cern.jet.random.engine.*;
 // 
 class SMThemeParkExperi1 {
 	public static void main(String[] args) {
-		int i, NUMRUNS = 4; // total 4 cases //TODO modify NUMBER = 4
+		int i = 4; // total 4 cases 
 		double startTime = 0.0, endTime = 750.0;
-		Seeds[] sds = new Seeds[NUMRUNS];
-		int[] boardingOptions = new int[] { 0, 1, 0, 1 }; // boarding options in
-															// 4 cases
-		boolean[] fixBoardingTime = new boolean[] { true, true, false, false }; // fix_boarding_time
-																				// options
-																				// in
-																				// 4
-																				// cases
 		SMThemePark park; // Simulation object
 		int initialNumTrains = 4;
 		int initialNumCars = 16;
+		
+		int[] boardingOptions = new int[] { 0, 1, 0, 1 }; // boarding options in 4 cases
+		boolean[] fixBoardingTime = new boolean[] { true, true, false, false }; // fix_boarding_time options in 4 cases
+		int NUMRUNS = fixBoardingTime.length; //TODO needs modifying?
 
+		Seeds[] sds = new Seeds[NUMRUNS];
 		// Lets get a set of uncorrelated seeds
 		RandomSeedGenerator rsg = new RandomSeedGenerator();
 		for (i = 0; i < NUMRUNS; i++) {
@@ -33,8 +30,8 @@ class SMThemeParkExperi1 {
 		for (i = 0; i < NUMRUNS; i++) {
 			System.out.println("==========Case " + i + "==========");
 			park = new SMThemePark(startTime, endTime, initialNumTrains,
-					initialNumCars, boardingOptions[i], fixBoardingTime[i],
-					sds[i]);
+									initialNumCars, boardingOptions[i], fixBoardingTime[i],
+									sds[i]);
 			park.runSimulation();
 			// System.out.println("==main:check:====");
 			while (park.checkContinue()) {
