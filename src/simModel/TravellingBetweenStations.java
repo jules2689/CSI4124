@@ -20,7 +20,8 @@ public class TravellingBetweenStations extends SequelActivity {
 
 	@Override
 	public void startingEvent() {
-		// System.out.println("TravellingBetweenStations==startingEvent==start");//TODO
+		//TODO: Investigate this method
+		Debugger.debug("TravellingBetweenStations==startingEvent==start");//TODO
 		Track iTrack = park.tracks.trackGroup[this.id]; // RQ.Tracks[ID]
 		iTrain = iTrack.trainGroup.get(0);// RQ.Tracks[ID].Trains[0]
 		if (iTrain != null && iTrain.status == Constants.TRAIN_STATUS_BOARDING) {
@@ -31,19 +32,17 @@ public class TravellingBetweenStations extends SequelActivity {
 			park.tracks.trackGroup[nextId].trainGroup.add(iTrain);
 			// SP.RemoveQue(RQ.Tracks[ID].Trains[0])
 			park.tracks.trackGroup[this.id].trainGroup.remove(0);
-			// System.out.println("remove 0 of track:" + this.id);
+			Debugger.debug("remove 0 of track:" + this.id, 2);
 		}
 
-		// TODO delete
-		// System.out.println("AFTER travelling begin:");
-		// this.park.printAllTrack();
-
-		// System.out.println("TravellingBetweenStations==startingEvent==end");//TODO
+		Debugger.debug("AFTER travelling begin:");
+		this.park.printAllTrack();
+		Debugger.debug("TravellingBetweenStations==startingEvent==end");//TODO
 	}
 
 	@Override
 	protected void terminatingEvent() {
-		// System.out.println("TravellingBetweenStations==terminatingEvent==start");//TODO
+		Debugger.debug("TravellingBetweenStations==terminatingEvent==start");//TODO
 		// RCG.Trains[ID].status = ARRIVED
 		int nextId = (this.id + 1) % 4;
 		if (iTrain != null && park.tracks.trackGroup[nextId].trainGroup.size() > 0) {
@@ -54,19 +53,15 @@ public class TravellingBetweenStations extends SequelActivity {
 				if (t.trainId == iTrain.trainId) {
 					t.status = Constants.TRAIN_STATUS_ARRIVED;
 					park.tracks.trackGroup[nextId].trainGroup.set(i, t);
-					// TODO delete start
-					// System.out.println("==modify:trackGroup:"+ nextId);
-					// System.out.println("==modify:train index:" + i + "ID:" +
-					// t.trainId);
-					// TODO delete end
+					Debugger.debug("==modify:trackGroup:"+ nextId, 2);
+					Debugger.debug("==modify:train index:" + i + "ID:" + t.trainId, 2);
 				}
 			}
 		}
-		// TODO delete
-		// System.out.println("after terminate travelling:");
-		// this.park.printAllTrack();
 
-		// System.out.println("TravellingBetweenStations==terminatingEvent==end");//TODO
+		 Debugger.debug("after terminate travelling:", 2);
+		 this.park.printAllTrack();
+		 Debugger.debug("TravellingBetweenStations==terminatingEvent==end");//TODO
 	}
 
 }

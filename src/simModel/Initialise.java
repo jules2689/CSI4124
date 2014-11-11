@@ -40,8 +40,7 @@ class Initialise extends ScheduledAction {
 			// put all trains on the track,
 			// segment of track(from FP to SH)
 			model.tracks.trackGroup[Constants.FP].trainGroup.add(icTrain);
-			// TODO delete
-			// model.printAllTrack();//TODO delete
+			model.printAllTrack();//TODO delete
 
 			// initialize of output
 			model.output.setTotalEvent(0);

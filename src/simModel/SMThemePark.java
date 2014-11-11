@@ -50,7 +50,8 @@ public class SMThemePark extends AOSimulationModel {
 
 	// Constructor
 	public SMThemePark(double t0time, double tftime, int nTrains, int nCars, int boardingOption, boolean fixBoardingTime, Seeds sd) {
-		// System.out.println("==SMThemePark==construct==start");//TODO
+		Debugger.debug("==SMThemePark==construct==start");
+		
 		// Initialise parameters here
 		this.numberOfTrains = nTrains;
 		this.numberOfCars = nCars;
@@ -97,7 +98,8 @@ public class SMThemePark extends AOSimulationModel {
 
 		ArriveAtStationSH arrivalSH = new ArriveAtStationSH(this);
 		scheduleAction(arrivalSH); // customer arrive at FP
-		// System.out.println("==SMThemePark==construct==end");//TODO
+		
+		Debugger.debug("==SMThemePark==construct==end");
 	}
 
 	/************ Implementation of Data Modules ***********/
@@ -110,8 +112,7 @@ public class SMThemePark extends AOSimulationModel {
 
 		// Check preconditions of Conditional Activities
 		if (UnBoardingAndBoarding.precondition(this) == true) {
-			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate
-																			// instance
+			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate instance
 			act.startingEvent();
 			scheduleActivity(act);
 		}
@@ -128,14 +129,14 @@ public class SMThemePark extends AOSimulationModel {
 				ExtSequelActivity extSeqObj = (ExtSequelActivity) nt.behaviourInstance;
 				interruptionNum = extSeqObj.interruptionPreCond();
 				if (interruptionNum != 0) {
-					// System.out.println("=testPreconditions==start interruption=start");//TODO
-					// delete
+					Debugger.debug("=testPreconditions==start interruption=start");
+					
 					extSeqObj.interruptionSCS(interruptionNum);
 					unscheduleBehaviour(nt);
 					i--;
 					num--;
-					// System.out.println("=testPreconditions==start interruption=end");//TODO
-					// delete
+					
+					Debugger.debug("=testPreconditions==start interruption=end");
 				}
 			}
 		}
@@ -144,8 +145,8 @@ public class SMThemePark extends AOSimulationModel {
 	@Override
 	protected boolean implicitStopCondition() // termination explicit
 	{
-		// System.out.println("===SMThemePark===implicitStopCondition===start===");//TODO
-		// delete
+		Debugger.debug("===SMThemePark===implicitStopCondition===start===");
+
 		boolean retVal = false;
 		Station stn;
 		boolean custFlag = false;
@@ -160,14 +161,11 @@ public class SMThemePark extends AOSimulationModel {
 			retVal = true;
 		}
 
-		// System.out.println("ClosingTime = " + closingTime + "currentTime = "
-		// + getClock() + "RG.Counter.n = " + rgCounter.size());
+		Debugger.debug("ClosingTime = " + closingTime + " currentTime = " + getClock(), 2);
+		Debugger.debug("implicit stop condition returns " + retVal, 2);
+		Debugger.debug("===SMThemePark===implicitStopCondition===end===retVal:" + retVal);
 
-		// System.out.println("implicit stop condition returns " + retVal);
-		// System.out.println("===SMThemePark===implicitStopCondition===end===retVal:"+retVal);//TODO
-		// delete
 		return (retVal);
-
 	}
 
 	@Override
@@ -235,7 +233,7 @@ public class SMThemePark extends AOSimulationModel {
 			System.out.println("");
 		}
 
-		// System.out.println("check:" + continueflag);
+		Debugger.debug("check: " + continueflag);
 		return continueflag;
 	}
 	
@@ -246,15 +244,13 @@ public class SMThemePark extends AOSimulationModel {
 
 	// reset with increament of train
 	public void resetWithIncre() {
-		// System.out.println("==resetWithIncre start:"); //TODO delete
+		Debugger.debug("==resetWithIncre start:");
 		this.numberOfCars++;
 
-		if (this.numberOfCars > this.numberOfTrains * 9) { // if reach maximum
-															// cars, increase
-															// train and restart
-															// with min cars
+		if (this.numberOfCars > this.numberOfTrains * 9) { // if reach maximum cars, increase train and restart with min cars
 			this.numberOfTrains++;
 			this.numberOfCars = this.numberOfTrains * 4;
+			Debugger.debug("\n\n================================================\n======================== NEW TRAIN ==========================\n================================================\n\n", 4);
 		}
 
 		// reset uNumCustomers in stations
@@ -269,7 +265,7 @@ public class SMThemePark extends AOSimulationModel {
 
 		initAOSimulModel(0.0, this.closingTime);
 		Initialise init = new Initialise(this);
-		// this.printAllTrack(); //TODO delete
+		this.printAllTrack();
 		scheduleAction(init); // Should always be first one scheduled.
 		// Schedule other scheduled actions and acitvities here
 
@@ -285,11 +281,8 @@ public class SMThemePark extends AOSimulationModel {
 
 		ArriveAtStationSH arrivalSH = new ArriveAtStationSH(this);
 		scheduleAction(arrivalSH); // customer arrive at FP
-		System.out.println("==resetWithIncre end==with numberOfCars:" // TODO
-																		// delete
-				+ this.numberOfCars
-				+ " and numberOfTrains:"
-				+ this.numberOfTrains); // TODO delete
+		
+		Debugger.debug("==resetWithIncre end==with numberOfCars:" + this.numberOfCars + " and numberOfTrains:" + this.numberOfTrains, 2);
 		this.runSimulation();
 	}
 
@@ -298,17 +291,17 @@ public class SMThemePark extends AOSimulationModel {
 		for (int i = 0; i < this.tracks.trackGroup.length; i++) {
 			Track track = this.tracks.trackGroup[i];
 			Station stn = this.stations.stationGroup[i];
-			System.out.println("########Track " + i + ":");
-			System.out.println("###Station cust:" + stn.uNumCustomers);
+			Debugger.debug("########Track " + i + ":", 2);
+			Debugger.debug("###Station cust:" + stn.uNumCustomers, 2);
 			if (track.trainGroup.size() > 0) {
 				Train train;
 				for (int j = 0; j < track.trainGroup.size(); j++) {
 					train = track.trainGroup.get(j);
-					System.out.println("###train index:" + j
+					Debugger.debug("###train index:" + j
 							+ " ###train number:" + train.trainId
 							+ "###numCars:" + train.numCars + " ###train cust:"
 							+ train.numCustomers + " ###train status:"
-							+ train.status);
+							+ train.status, 2);
 				}
 			}
 		}

@@ -13,8 +13,8 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 
 	@Override
 	public int interruptionPreCond() {
-		// System.out.println("==ExtraBoardingTime==interruptionPreCond==start");//TODO
-		// delete
+		Debugger.debug("==ExtraBoardingTime==interruptionPreCond==start", 1);
+
 		int flagValue = 0;
 		// fixedBoardingTime = TRUE OR
 		// UP.checkTrainArrived(G.Stations[ID]) = TRUE OR
@@ -30,15 +30,15 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 				flagValue = 3;
 			}
 		}
-		// System.out.println("==ExtraBoardingTime==interruptionPreCond==end:" +
-		// flagValue);//TODO delete
+		
+		Debugger.debug("==ExtraBoardingTime==interruptionPreCond==end:" + flagValue, 1);
 		return flagValue;
 	}
 
 	@Override
 	public void interruptionSCS(int arg0) {
-		// System.out.println("==ExtraBoardingTime==interruptionSCS==start");//TODO
-		// delete
+		Debugger.debug("==ExtraBoardingTime==interruptionSCS==start", 1);
+
 		// calculate the situation event
 		Station stn = park.stations.stationGroup[id];
 		setOutputForStation(stn);
@@ -48,8 +48,7 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 				this.park, this.id);
 		park.spStart(travelAct);
 
-		// System.out.println("==ExtraBoardingTime==interruptionSCS==end");//TODO
-		// delete
+		Debugger.debug("==ExtraBoardingTime==interruptionSCS==end", 1);
 	}
 
 	@Override
@@ -59,14 +58,12 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 
 	@Override
 	public void startingEvent() {
-		// System.out.println("==ExtraBoardingTime==startingEvent==do nothing==");//TODO
-		// delete
+		Debugger.debug("==ExtraBoardingTime==startingEvent==do nothing==", 1);
 	}
 
 	@Override
 	protected void terminatingEvent() {
-		// System.out.println("==ExtraBoardingTime==terminatingEvent==start");//TODO
-		// delete
+		Debugger.debug("==ExtraBoardingTime==terminatingEvent==start", 1);
 		// calculate the situation event
 		Station stn = park.stations.stationGroup[id];
 		setOutputForStation(stn);
@@ -75,8 +72,7 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 		TravellingBetweenStations travelAct = new TravellingBetweenStations(
 				this.park, this.id);
 		park.spStart(travelAct);
-		// System.out.println("==ExtraBoardingTime==terminatingEvent==end");//TODO
-		// delete
+		Debugger.debug("==ExtraBoardingTime==terminatingEvent==end", 1);
 	}
 
 	protected void setOutputForStation(Station stn) {
