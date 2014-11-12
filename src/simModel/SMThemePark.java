@@ -224,7 +224,7 @@ public class SMThemePark extends AOSimulationModel {
 			System.out.println("***TOTAL: " + total);
 	
 			if (checkGoalReached()) {
-				System.out.println("****Reach the goal with  " + this.numberOfTrains + " trains and " + this.numberOfCars + " cars in total.");
+				System.out.println("****Reach the goal with  " + this.numberOfTrains + " trains and " + this.numberOfCars + " cars in total, at a cost of $" + this.cost());
 			}
 	
 			if (this.numberOfCars == 72) {
