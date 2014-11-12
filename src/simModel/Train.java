@@ -26,4 +26,14 @@ public class Train {
 	public int getCustomerLeaving() {
 		return this.customerLeaving;
 	}
+	
+	public void addCar() {
+		this.numCars++;
+		this.maxCustomers = Constants.MAX_CUSTOMERS_PER_CAR * this.numCars;
+	}
+	
+	@Override
+	public String toString() {
+		return "ID: " + this.trainId + " ~Number of Cars: " + this.numCars + " ~ Max Customers: " + this.maxCustomers;
+	}
 }

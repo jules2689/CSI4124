@@ -102,8 +102,7 @@ class RVPs {
 	//
 	protected double uCustomersFP() {
 		double mean = getMeanTime();
-		double nxtArrival = model.getClock()
-				+ interArrDistFP.nextDouble(1.0 / mean);
+		double nxtArrival = model.getClock() + interArrDistFP.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
 		}
@@ -112,8 +111,7 @@ class RVPs {
 
 	protected double uCustomersSH() {
 		double mean = getMeanTime();
-		double nxtArrival = model.getClock()
-				+ interArrDistSH.nextDouble(1.0 / mean);
+		double nxtArrival = model.getClock() + interArrDistSH.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
 		}
@@ -122,8 +120,7 @@ class RVPs {
 
 	protected double uCustomersGI() {
 		double mean = getMeanTime();
-		double nxtArrival = model.getClock()
-				+ interArrDistGI.nextDouble(1.0 / mean);
+		double nxtArrival = model.getClock() + interArrDistGI.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
 		}
@@ -132,8 +129,7 @@ class RVPs {
 
 	protected double uCustomersRC() {
 		double mean = getMeanTime();
-		double nxtArrival = model.getClock()
-				+ interArrDistRC.nextDouble(1.0 / mean);
+		double nxtArrival = model.getClock() + interArrDistRC.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
 		}

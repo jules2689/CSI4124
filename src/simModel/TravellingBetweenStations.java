@@ -21,7 +21,7 @@ public class TravellingBetweenStations extends SequelActivity {
 	@Override
 	public void startingEvent() {
 		//TODO: Investigate this method
-		Debugger.debug("TravellingBetweenStations==startingEvent==start");//TODO
+		Debugger.debug("TravellingBetweenStations==startingEvent==start", 2);//TODO
 		Track iTrack = park.tracks.trackGroup[this.id]; // RQ.Tracks[ID]
 		iTrain = iTrack.trainGroup.get(0);// RQ.Tracks[ID].Trains[0]
 		if (iTrain != null && iTrain.status == Constants.TRAIN_STATUS_BOARDING) {
@@ -37,7 +37,7 @@ public class TravellingBetweenStations extends SequelActivity {
 
 		Debugger.debug("AFTER travelling begin:");
 		this.park.printAllTrack();
-		Debugger.debug("TravellingBetweenStations==startingEvent==end");//TODO
+		Debugger.debug("TravellingBetweenStations==startingEvent==end", 2);//TODO
 	}
 
 	@Override

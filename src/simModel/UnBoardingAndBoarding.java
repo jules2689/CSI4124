@@ -45,32 +45,34 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 				id = idList.get(k).intValue();// ID
 				Track iTrack = park.tracks.trackGroup[id]; // RQ.Tracks[ID]
 				Train headTrain = iTrack.trainGroup.get(0);// RQ.Tracks[ID].Trains[0]
+				Station station = park.stations.stationGroup[id];
 				// RQ.Tracks[ID].Trains[0] = BOARDING
 				headTrain.status = Constants.TRAIN_STATUS_BOARDING;
 				// unboarding:
 				// RQ.Tracks[ID].Trains[0].numCustomers ��
 				// RQ.Tracks[ID].Trains[0].numCustomers -
 				// RQ.Tracks[ID].Trains[0].leavingCustomers
-				headTrain.numCustomers = headTrain.numCustomers
-						- headTrain.getCustomerLeaving();
-
+				headTrain.numCustomers = headTrain.numCustomers - headTrain.getCustomerLeaving();
+				int capacityAvailableForTrain = headTrain.maxCustomers - headTrain.numCustomers;
+				
 				// boarding:
-				if (park.stations.stationGroup[id].uNumCustomers > headTrain.maxCustomers - headTrain.numCustomers) {
+				if (station.uNumCustomers >= capacityAvailableForTrain) {
 					// train is full, some customer cannot boarding
-					park.stations.stationGroup[id].uNumCustomers = park.stations.stationGroup[id].uNumCustomers - (headTrain.maxCustomers - headTrain.numCustomers);
+					station.uNumCustomers = station.uNumCustomers - capacityAvailableForTrain;
 					headTrain.numCustomers = headTrain.maxCustomers;
 				} else {
 					// train is not full, all customers boarding in the train
-					headTrain.numCustomers = headTrain.numCustomers + park.stations.stationGroup[id].uNumCustomers;
-					park.stations.stationGroup[id].uNumCustomers = 0;
+					headTrain.numCustomers = headTrain.numCustomers + station.uNumCustomers;
+					station.uNumCustomers = 0;
 				}
+				
+				setOutputForStation(station);
 				// update customer leaving at next station
 				// RQ.Tracks[ID].Trains[0].leavingCustomers ��
 				// RQ.Tracks[ID].Trains[0].numCustomers *
 				// Constants.PERCENTAGE_OF_UNBOARDING[ID+1]
 				int nextId = (id + 1) % 4;
 				headTrain.customerLeaving = (int) (headTrain.numCustomers * Constants.PERCENTAGE_OF_UNBOARDING[nextId]);
-
 				park.tracks.trackGroup[id].trainGroup.set(0, headTrain);
 			}
 
@@ -86,12 +88,32 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 			int id;
 			for (int k = 0; k < this.idList.size(); k++) {
 				id = idList.get(k).intValue();// ID
-				ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(
-						this.park, id);
+				ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(this.park, id);
 				// SP.Start(ExtraBoardingTime)
 				park.spStart(extraBoardingTime);
 			}
 		}
+	}
+	
+	protected void setOutputForStation(Station stn) {
+		if (stn.uNumCustomers == 0) {
+			park.output.incrType1BoardingEvent();
+		} else if (stn.uNumCustomers >= 1 && stn.uNumCustomers < 25) {
+			park.output.incrType2BoardingEvent();
+		} else if (stn.uNumCustomers >= 25 && stn.uNumCustomers < 50) {
+			park.output.incrType3BoardingEvent();
+		} else {
+			park.output.incrType4BoardingEvent();
+		}
+		park.output.incrTotalEvent();
+		
+		Debugger.debug("\n\nStats for " + stn.name, 4);
+		Debugger.debug("Has... " + stn.uNumCustomers, 4);
+		Debugger.debug("Total Events : " + park.output.getTotalEvent(),4);
+		Debugger.debug("Total 1 : " + park.output.getType1BoardingEvent(),4);
+		Debugger.debug("Total 2 : " + park.output.getType2BoardingEvent(),4);
+		Debugger.debug("Total 3 : " + park.output.getType3BoardingEvent(),4);
+		Debugger.debug("Total 4 : " + park.output.getType4BoardingEvent() + "\n\n",4);
 	}
 
 }

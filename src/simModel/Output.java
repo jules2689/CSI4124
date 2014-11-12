@@ -97,6 +97,26 @@ class Output {
 	public void setType4BoardingEvent(int type4BoardingEvent) {
 		this.type4BoardingEvent = type4BoardingEvent;
 	}
+	
+	public void incrTotalEvent() {
+		totalEvent++;
+	}
+	
+	public void incrType1BoardingEvent() {
+		this.type1BoardingEvent++;
+	}
+
+	public void incrType2BoardingEvent() {
+		this.type2BoardingEvent++;
+	}
+
+	public void incrType3BoardingEvent(){
+		this.type3BoardingEvent++;
+	}
+
+	public void incrType4BoardingEvent() {
+		this.type4BoardingEvent++;
+	}
 
 	// public void reset(){
 	// this.setTotalEvent(0);

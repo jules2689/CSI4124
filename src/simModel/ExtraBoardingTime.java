@@ -39,13 +39,8 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 	public void interruptionSCS(int arg0) {
 		Debugger.debug("==ExtraBoardingTime==interruptionSCS==start", 1);
 
-		// calculate the situation event
-		Station stn = park.stations.stationGroup[id];
-		setOutputForStation(stn);
-
 		// SP.Start(TravellingBetweenStations)
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(
-				this.park, this.id);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.park, this.id);
 		park.spStart(travelAct);
 
 		Debugger.debug("==ExtraBoardingTime==interruptionSCS==end", 1);
@@ -64,29 +59,11 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 	@Override
 	protected void terminatingEvent() {
 		Debugger.debug("==ExtraBoardingTime==terminatingEvent==start", 1);
-		// calculate the situation event
-		Station stn = park.stations.stationGroup[id];
-		setOutputForStation(stn);
 
 		// SP.Start(TravellingBetweenStations)
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(
-				this.park, this.id);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.park, this.id);
 		park.spStart(travelAct);
 		Debugger.debug("==ExtraBoardingTime==terminatingEvent==end", 1);
-	}
-
-	protected void setOutputForStation(Station stn) {
-		if (stn.uNumCustomers == 0) {
-			park.output.setType1BoardingEvent(park.output.getType1BoardingEvent() + 1);
-		} else if (stn.uNumCustomers >= 1 && stn.uNumCustomers < 25) {
-			park.output.setType2BoardingEvent(park.output.getType2BoardingEvent() + 1);
-		} else if (stn.uNumCustomers >= 25 && stn.uNumCustomers < 50) {
-			park.output.setType3BoardingEvent(park.output.getType3BoardingEvent() + 1);
-		} else {
-			park.output.setType4BoardingEvent(park.output.getType4BoardingEvent() + 1);
-		}
-
-		park.output.setTotalEvent(park.output.getTotalEvent() + 1);
 	}
 
 }

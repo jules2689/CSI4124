@@ -70,8 +70,9 @@ public class SMThemePark extends AOSimulationModel {
 		// this.tracks.trackGroup[Constants.FP].insertQue(icTrain);
 		// }
 		// Initial four station
+		String []names = new String[]{Constants.FP_S, Constants.SH_S, Constants.GI_S, Constants.RC_S};
 		for (int i = 0; i < this.stations.stationGroup.length; i++) {
-			this.stations.stationGroup[i] = new Station();
+			this.stations.stationGroup[i] = new Station(names[i]);
 		}
 		// Initial tracks
 		for (int i = 0; i < this.tracks.trackGroup.length; i++) {
@@ -250,7 +251,7 @@ public class SMThemePark extends AOSimulationModel {
 		if (this.numberOfCars > this.numberOfTrains * 9) { // if reach maximum cars, increase train and restart with min cars
 			this.numberOfTrains++;
 			this.numberOfCars = this.numberOfTrains * 4;
-			Debugger.debug("\n\n================================================\n======================== NEW TRAIN ==========================\n================================================\n\n", 4);
+			Debugger.debug("\n\n================================================\n================= NEW TRAIN " + this.numberOfTrains + " ==================\n================================================\n\n", 4);
 		}
 
 		// reset uNumCustomers in stations

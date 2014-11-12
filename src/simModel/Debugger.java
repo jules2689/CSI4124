@@ -3,7 +3,7 @@ package simModel;
 public class Debugger {
 	
 	private static final boolean debug = true;
-	private static final int log_level = 2;
+	private static final int log_level = 5;
 
 	public static void debug(String message) {
 		debug(message, 1);
