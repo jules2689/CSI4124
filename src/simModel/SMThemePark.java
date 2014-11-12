@@ -102,6 +102,8 @@ public class SMThemePark extends AOSimulationModel {
 		
 		Debugger.debug("==SMThemePark==construct==end");
 	}
+	
+	public SMThemePark() { }
 
 	/************ Implementation of Data Modules ***********/
 	/*
@@ -221,13 +223,11 @@ public class SMThemePark extends AOSimulationModel {
 			double total = this.output.getPerctOfType4Scen() + this.output.getPerctOfType3Scen() + this.output.getPerctOfType2Scen() + this.output.getPerctOfType1Scen();
 			System.out.println("***TOTAL: " + total);
 	
-			if (this.output.getPerctOfType4Scen() == 0 && this.output.getPerctOfType3Scen() <= 5 && this.output.getPerctOfType2Scen() <= 10) {
+			if (checkGoalReached()) {
 				System.out.println("****Reach the goal with  " + this.numberOfTrains + " trains and " + this.numberOfCars + " cars in total.");
-				continueflag = false;
 			}
 	
 			if (this.numberOfCars == 72) {
-				System.out.println("Could not reach the goal....");
 				continueflag = false;
 			}
 			
@@ -236,6 +236,10 @@ public class SMThemePark extends AOSimulationModel {
 
 		Debugger.debug("check: " + continueflag);
 		return continueflag;
+	}
+	
+	public boolean checkGoalReached() {
+		return this.output.getPerctOfType4Scen() == 0 && this.output.getPerctOfType3Scen() <= 5 && this.output.getPerctOfType2Scen() <= 10;
 	}
 	
 	//TODO Added Helper Method for Docs?
@@ -285,6 +289,47 @@ public class SMThemePark extends AOSimulationModel {
 		
 		Debugger.debug("==resetWithIncre end==with numberOfCars:" + this.numberOfCars + " and numberOfTrains:" + this.numberOfTrains, 2);
 		this.runSimulation();
+	}
+	
+	@Override
+	public String toString() {
+		String string = this.numberOfTrains + " trains\n" + this.numberOfCars + " cars\n";
+		
+		if (this.boardingOption == 0 ) {
+			string += "boarding option: single-sided\n";
+		} else {
+			string += "boarding option: double-sided\n";
+		}
+		
+		if (fixBoardingTime) {
+			string += "Fixed boarding time\n";
+		} else {
+			string += "Unfixed boarding time\n";
+		}
+		
+		string += "Cost of scenario : $" + this.cost() + "\n";
+		
+		return string;
+	}
+	
+	//TODO : Add to doc
+	public int cost() {
+		int cost = this.numberOfTrains * Constants.COST_OF_TRAIN;
+		if (this.boardingOption == 1) {
+			cost += this.numberOfCars * (Constants.COST_OF_CAR + 20);
+		} else {
+			cost += this.numberOfCars * Constants.COST_OF_CAR;
+		}
+		return cost;
+	}
+	
+	public SMThemePark shallowClone() {
+		SMThemePark park = new SMThemePark();
+		park.fixBoardingTime = this.fixBoardingTime;
+		park.boardingOption = this.boardingOption;
+		park.numberOfTrains = this.numberOfTrains;
+		park.numberOfCars = this.numberOfCars;
+		return park;
 	}
 
 	// TODO method for debug DELETE

@@ -7,23 +7,7 @@ class Output {
 	// Constructor
 	Output(SMThemePark model) {
 		this.park = model;
-		// Setup trajectory set
-		// trjRGBerthsN = new OutputSequence("gBerthsN");
-
-		// First point in output sequence - R.BerthGroup is empty at t=0
-		// lastGBerthsN = 0;
-		// trjRGBerthsN.put(0.0,0.0);
-		// phiICTankerTotalWait = new OutputSequence("TankerWait");
 	}
-
-	// Use OutputSequence class to define Trajectory and Sample Sequences
-	// Trajectory Sequences
-
-	// Sample Sequences
-
-	// DSOVs available in the OutputSequence objects
-	// If seperate methods required to process Trajectory or Sample
-	// Sequences - add them here
 
 	// SSOVs
 	private int totalEvent = 0;// TODO modify document

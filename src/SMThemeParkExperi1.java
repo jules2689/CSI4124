@@ -1,6 +1,10 @@
 // File: Experiment.java
 // Description:
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import simModel.*;
 import cern.jet.random.engine.*;
 
@@ -27,28 +31,27 @@ class SMThemeParkExperi1 {
 
 		// Loop for NUMRUN simulation runs for each case
 		// Case i
+		SMThemePark optimalPark = null;
+		
 		for (i = 0; i < NUMRUNS; i++) {
 			System.out.println("==========Case " + i + "==========");
 			park = new SMThemePark(startTime, endTime, initialNumTrains, initialNumCars, boardingOptions[i], fixBoardingTime[i], sds[i]);
 			park.runSimulation();
-			// System.out.println("==main:check:====");
 			while (park.checkContinue()) {
+				if (park.checkGoalReached()) {
+					if (optimalPark == null || (optimalPark != null && optimalPark.cost() > park.cost())) {
+						optimalPark = park.shallowClone();
+					}
+				}
 				park.resetWithIncre();
-				// initialNumCars ++ ;
-				// if(initialNumCars % initialNumTrains == 0){
-				// initialNumTrains ++ ;
-				// }
-				// System.out.println("**********initialNumCars:" +
-				// initialNumCars +
-				// "    initialNumTrains:" + initialNumTrains);//TODO delete
-				// park = new
-				// SMThemePark(startTime,endTime,initialNumTrains,initialNumCars,
-				// boardingOptions[i],fixBoardingTime[i],sds[i]);
-				// park.runSimulation();
 			}
-			// See examples for hints on collecting output
-			// and developing code for analysis
 
+		}
+		
+		if (optimalPark != null) {
+			System.out.println("Optimal Solution: \n" + optimalPark.toString());
+		} else {
+			System.out.println("Could not reach the goal");
 		}
 	}
 }

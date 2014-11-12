@@ -23,6 +23,9 @@ public class Constants {
 	protected final static int TRAIN_STATUS_ARRIVED = 2;
 
 	// TODO add to document
-	protected final static double[] PERCENTAGE_OF_UNBOARDING = new double[] {
-			0.30, 0.2425, 0.2625, 0.195 };
+	protected final static double[] PERCENTAGE_OF_UNBOARDING = new double[] { 0.30, 0.2425, 0.2625, 0.195 };
+
+	//TODO add to document
+	protected final static int COST_OF_TRAIN = 300;
+	protected final static int COST_OF_CAR = 500;
 }
