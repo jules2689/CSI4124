@@ -5,7 +5,7 @@ import cern.jet.random.engine.MersenneTwister;
 
 class RVPs {
 	SMThemePark model; // for accessing the clock
-	// Data Models - i.e. random veriate generators for distributions
+	// Data Models - i.e. random variate generators for distributions
 	// are created using Colt classes, define
 	// reference variables here and create the objects in the
 	// constructor with seeds

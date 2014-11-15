@@ -24,13 +24,13 @@ public class SMThemePark extends AOSimulationModel {
 	/* Group and Queue Entities */
 	// Define the reference variables to the various
 	// entities with scope Set and Unary
-	// Objects can be created here or in the Initialise Action
+	// Objects can be created here or in the Initialize Action
 	Tracks tracks = new Tracks(); // RQ.Tracks
 	Stations stations = new Stations(); // G.Stations
 	Trains trains = new Trains(); // RCG.Trains
 
 	/* Input Variables */
-	// Define any Independent Input Varaibles here
+	// Define any Independent Input Variables here
 
 	// References to RVP and DVP objects
 	protected RVPs rvp; // Reference to rvp object - object created in
@@ -52,7 +52,7 @@ public class SMThemePark extends AOSimulationModel {
 	public SMThemePark(double t0time, double tftime, int nTrains, int nCars, int boardingOption, boolean fixBoardingTime, Seeds sd) {
 		Debugger.debug("==SMThemePark==construct==start");
 		
-		// Initialise parameters here
+		// Initialize parameters here
 		this.numberOfTrains = nTrains;
 		this.numberOfCars = nCars;
 		this.boardingOption = boardingOption;
@@ -80,12 +80,12 @@ public class SMThemePark extends AOSimulationModel {
 		}
 
 		closingTime = tftime; // record the closing time
-		// Initialise the simulation model
+		// Initialize the simulation model
 		initAOSimulModel(t0time, tftime);
 
 		Initialise init = new Initialise(this);
 		scheduleAction(init); // Should always be first one scheduled.
-		// Schedule other scheduled actions and acitvities here
+		// Schedule other scheduled actions and activities here
 
 		// Schedule the first arrivals
 		ArriveAtStationFP arrivalFP = new ArriveAtStationFP(this);
@@ -272,7 +272,7 @@ public class SMThemePark extends AOSimulationModel {
 		Initialise init = new Initialise(this);
 		this.printAllTrack();
 		scheduleAction(init); // Should always be first one scheduled.
-		// Schedule other scheduled actions and acitvities here
+		// Schedule other scheduled actions and activities here
 
 		// Schedule the first arrivals
 		ArriveAtStationFP arrivalFP = new ArriveAtStationFP(this);
