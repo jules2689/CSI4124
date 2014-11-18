@@ -39,7 +39,11 @@ public class Trains {
 	}
 
 	protected int getN() {
-		return numCustomers.length;
+		int sum = 0;
+		for (int i = 0; i< this.numCustomers.length; i++) {
+			sum += this.numCustomers[i];
+		}
+		return sum;
 	} // Attribute n
 
 	protected int getMaxNumberOfCustomers() {
