@@ -28,9 +28,9 @@ class Initialise extends ScheduledAction {
 		
 		int numRemainderCars = model.numberOfCars%model.numberOfTrains;
 		
-		for (int i = 0; i < model.numberOfTrains; i++){
+		for (int i = 0; i < model.numberOfTrains; i++) {
 			int numCars = (int)(model.numberOfCars/model.numberOfTrains);
-			if (numRemainderCars > 0){
+			if (numRemainderCars > 0) {
 				numCars++;
 				numRemainderCars--;
 			}

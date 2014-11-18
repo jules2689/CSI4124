@@ -42,8 +42,7 @@ class DVPs {
 		return nextTime;
 	}
 
-	protected double getPercentageOfCustomersLeaving(int fromStation,
-			int toStation) {
+	protected double getPercentageOfCustomersLeaving(int fromStation, int toStation) {
 		double result = 0;
 		switch (fromStation) {
 		case Constants.FP:

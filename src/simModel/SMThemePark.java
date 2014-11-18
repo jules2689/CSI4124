@@ -19,9 +19,7 @@ public class SMThemePark extends AOSimulationModel {
 
 	/*-------------Entity Data Structures-------------------*/
 	/* Group and Queue Entities */
-	// Define the reference variables to the various
-	// entities with scope Set and Unary
-	// Objects can be created here or in the Initialize Action
+	// Define the reference variables to the various entities with scope Set and Unary Objects can be created here or in the Initialize Action
 	Tracks[] rqTracks = new Tracks[4]; // RQ.Tracks
 	Stations[] gStations = new Stations[4]; // G.Stations
 	Trains[] rcgTrains; // RCG.Trains
@@ -30,25 +28,20 @@ public class SMThemePark extends AOSimulationModel {
 	// Define any Independent Input Variables here
 
 	// References to RVP and DVP objects
-	protected RVPs rvp; // Reference to rvp object - object created in
-						// constructor
+	protected RVPs rvp; // Reference to rvp object - object created in constructor
 	protected DVPs dvp = new DVPs(this); // Reference to dvp object
 	protected UDPs udp = new UDPs(this);
 
 	// Output object
 	public Output output = new Output(this);
 
-	// Output values - define the public methods that return values
-	// required for experimentation.
+	// Output values - define the public methods that return values required for experimentation.
 
-	// Other values
-	// closing time of the park
+	// Other values closing time of the park
 	protected double closingTime;
 
 	// Constructor
-	public SMThemePark(double t0time, double tftime, int nTrains, int nCars,
-			int boardingOption, boolean fixBoardingTime, Seeds sd,
-			boolean traceFlag) {
+	public SMThemePark(double t0time, double tftime, int nTrains, int nCars, int boardingOption, boolean fixBoardingTime, Seeds sd, boolean traceFlag) {
 
 		// Turn trancing on if traceFlag is true
 		this.traceFlag = traceFlag;
@@ -311,14 +304,10 @@ public class SMThemePark extends AOSimulationModel {
 	 */
 
 	public void outputResults() {
-		System.out.println("Percentage of Type 1 Events: "
-				+ output.getPerctOfType1Scen());
-		System.out.println("Percentage of Type 2 Events: "
-				+ output.getPerctOfType2Scen());
-		System.out.println("Percentage of Type 3 Events: "
-				+ output.getPerctOfType3Scen());
-		System.out.println("Percentage of Type 4 Events: "
-				+ output.getPerctOfType4Scen());
+		System.out.println("Percentage of Type 1 Events: " + output.getPerctOfType1Scen());
+		System.out.println("Percentage of Type 2 Events: " + output.getPerctOfType2Scen());
+		System.out.println("Percentage of Type 3 Events: " + output.getPerctOfType3Scen());
+		System.out.println("Percentage of Type 4 Events: " + output.getPerctOfType4Scen());
 
 		int cost = 0;
 		cost += this.numberOfTrains * Constants.COST_OF_TRAIN;

@@ -13,7 +13,6 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 
 	@Override
 	public int interruptionPreCond() {
-
 		int flagValue = 0;
 		// fixedBoardingTime = TRUE OR
 		// UP.checkTrainArrived(G.Stations[ID]) = TRUE OR
@@ -35,10 +34,8 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 
 	@Override
 	public void interruptionSCS(int arg0) {		
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(
-				this.model, this.id);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.model, this.id);
 		model.spStart(travelAct);
-
 	}
 
 	@Override
@@ -53,10 +50,8 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 
 	@Override
 	protected void terminatingEvent() {
-
 		// SP.Start(TravellingBetweenStations)
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(
-				this.model, this.id);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.model, this.id);
 		model.spStart(travelAct);
 
 	}

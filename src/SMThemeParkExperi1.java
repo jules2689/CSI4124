@@ -1,10 +1,6 @@
 // File: Experiment.java
 // Description:
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import simModel.*;
 import cern.jet.random.engine.*;
 
@@ -31,18 +27,9 @@ class SMThemeParkExperi1 {
 			sds[i] = new Seeds(rsg);
 		}
 
-		// Loop for NUMRUN simulation runs for each case
-		// Case i
-		SMThemePark optimalPark = null;
-
-		// each case once or twice
-		// most of this is for next week
-
 		for (i = 0; i < NUMRUNS; i++) {
 			System.out.println("==========Case " + i + "==========");
-			park = new SMThemePark(startTime, endTime, initialNumTrains,
-					initialNumCars, boardingOptions[i], fixBoardingTime[i],
-					sds[i], false);
+			park = new SMThemePark(startTime, endTime, initialNumTrains, initialNumCars, boardingOptions[i], fixBoardingTime[i], sds[i], false);
 			park.runSimulation();
 			park.outputResults();
 		}

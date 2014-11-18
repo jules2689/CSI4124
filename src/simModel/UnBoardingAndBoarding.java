@@ -54,17 +54,14 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 
 		for (int i = 0; i < model.gStations.length; i++) {
 			int nextID = (id + 1) % model.gStations.length;
-			int numLeaving = (int) (numCustomersBoarding * model.dvp
-					.getPercentageOfCustomersLeaving(id, nextID));
-			train.setCustomerLeaving(id, train.getCustomerLeaving(id)
-					+ numLeaving);
+			int numLeaving = (int) (numCustomersBoarding * model.dvp.getPercentageOfCustomersLeaving(id, nextID));
+			train.setCustomerLeaving(id, train.getCustomerLeaving(id) + numLeaving);
 		}
 	}
 
 	@Override
 	protected void terminatingEvent() {
-		ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(this.model,
-				id);
+		ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(this.model, id);
 		model.spStart(extraBoardingTime);
 	}
 

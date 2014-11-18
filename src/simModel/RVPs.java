@@ -76,17 +76,10 @@ class RVPs {
 	public RVPs(SMThemePark model, Seeds sd) {
 		this.model = model;
 		// Set up distribution functions
-		interArrDistFP = new Exponential(1.0 / MEAN_ARRL_FP_1,
-				new MersenneTwister(sd.arrFP));
-
-		interArrDistSH = new Exponential(1.0 / MEAN_ARRL_SH_1,
-				new MersenneTwister(sd.arrSH));
-
-		interArrDistGI = new Exponential(1.0 / MEAN_ARRL_GI_1,
-				new MersenneTwister(sd.arrGI));
-
-		interArrDistRC = new Exponential(1.0 / MEAN_ARRL_RC_1,
-				new MersenneTwister(sd.arrRC));
+		interArrDistFP = new Exponential(1.0 / MEAN_ARRL_FP_1, new MersenneTwister(sd.arrFP));
+		interArrDistSH = new Exponential(1.0 / MEAN_ARRL_SH_1, new MersenneTwister(sd.arrSH));
+		interArrDistGI = new Exponential(1.0 / MEAN_ARRL_GI_1, new MersenneTwister(sd.arrGI));
+		interArrDistRC = new Exponential(1.0 / MEAN_ARRL_RC_1,new MersenneTwister(sd.arrRC));
 	}
 
 	// protected double duInput() // for getting next value of uW(t)
