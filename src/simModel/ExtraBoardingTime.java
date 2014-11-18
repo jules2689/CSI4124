@@ -33,8 +33,13 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 	}
 
 	@Override
-	public void interruptionSCS(int arg0) {		
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.model, this.id);
+	public void interruptionSCS(int arg0) {
+		// board train
+		model.udp.boardAtStation(id);
+		// set output
+		model.udp.setOutputForStation(model.gStations[id]);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(
+				this.model, this.id);
 		model.spStart(travelAct);
 	}
 
@@ -50,8 +55,13 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 
 	@Override
 	protected void terminatingEvent() {
+		// board train
+		model.udp.boardAtStation(id);
+		// set output
+		model.udp.setOutputForStation(model.gStations[id]);
 		// SP.Start(TravellingBetweenStations)
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.model, this.id);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(
+				this.model, this.id);
 		model.spStart(travelAct);
 
 	}
