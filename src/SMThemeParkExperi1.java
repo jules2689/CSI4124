@@ -29,6 +29,7 @@ class SMThemeParkExperi1 {
 
 		for (i = 0; i < NUMRUNS; i++) {
 			System.out.println("==========Case " + i + "==========");
+			System.out.println("Number of Cars: " + initialNumCars + " Number of Trains: " + initialNumTrains);
 			park = new SMThemePark(startTime, endTime, initialNumTrains, initialNumCars, boardingOptions[i], fixBoardingTime[i], sds[i], false);
 			park.runSimulation();
 			park.outputResults();
