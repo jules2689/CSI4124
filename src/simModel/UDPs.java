@@ -59,7 +59,9 @@ public class UDPs {
 		int numCustomersBoarding = 0;
 
 		// boarding:
+		
 		if (station.numCustomers >= capacityAvailableForTrain) {
+			
 			// train is full, some customer cannot boarding
 			numCustomersBoarding = capacityAvailableForTrain;
 		} else {

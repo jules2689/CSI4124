@@ -27,10 +27,10 @@ class SMThemeParkExperi1 {
 			sds[i] = new Seeds(rsg);
 		}
 
-		for (i = 0; i < NUMRUNS; i++) {
+		for (i = 0; i < 1; i++) {
 			System.out.println("==========Case " + i + "==========");
 			System.out.println("Number of Cars: " + initialNumCars + " Number of Trains: " + initialNumTrains);
-			park = new SMThemePark(startTime, endTime, initialNumTrains, initialNumCars, boardingOptions[i], fixBoardingTime[i], sds[i], false);
+			park = new SMThemePark(startTime, endTime, initialNumTrains, initialNumCars, boardingOptions[i], fixBoardingTime[i], sds[i], true);
 			park.runSimulation();
 			park.outputResults();
 		}

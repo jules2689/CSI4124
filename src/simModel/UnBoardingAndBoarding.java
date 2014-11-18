@@ -4,7 +4,7 @@ import absmodJ.ConditionalActivity;
 
 public class UnBoardingAndBoarding extends ConditionalActivity {
 	SMThemePark model;
-	static int id;
+	int id;
 
 	public UnBoardingAndBoarding(SMThemePark park) {
 		this.model = park;

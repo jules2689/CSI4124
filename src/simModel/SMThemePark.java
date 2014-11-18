@@ -103,8 +103,7 @@ public class SMThemePark extends AOSimulationModel {
 
 		// test for unboarding and boarding
 		if (UnBoardingAndBoarding.precondition(this) == true) {
-			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate
-																			// instance
+			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate												// instance
 			act.startingEvent();
 			scheduleActivity(act);
 		}
@@ -138,8 +137,8 @@ public class SMThemePark extends AOSimulationModel {
 
 	protected void eventOccured() {
 		if (traceFlag) {
-			// show the SBL and verification here
-			this.showSBL();
+			
+
 		}
 		//
 		// System.out.println("***Total events:"+this.output.getTotalEvent());
@@ -304,6 +303,12 @@ public class SMThemePark extends AOSimulationModel {
 	 */
 
 	public void outputResults() {
+		
+		/*System.out.println("Station FP:" + this.gStations[Constants.FP].numCustomers);
+		System.out.println("Station SH:" + this.gStations[Constants.SH].numCustomers);
+		System.out.println("Station GI:" + this.gStations[Constants.GI].numCustomers);
+		System.out.println("Station RC:" + this.gStations[Constants.RC].numCustomers);*/
+		
 		System.out.println("Percentage of Type 1 Events: " + output.getPerctOfType1Scen());
 		System.out.println("Percentage of Type 2 Events: " + output.getPerctOfType2Scen());
 		System.out.println("Percentage of Type 3 Events: " + output.getPerctOfType3Scen());
