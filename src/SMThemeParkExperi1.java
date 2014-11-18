@@ -20,11 +20,8 @@ class SMThemeParkExperi1 {
 
 		int[] boardingOptions = new int[] { 0, 1, 0, 1 }; // boarding options in
 															// 4 cases
-		boolean[] fixBoardingTime = new boolean[] { true, true, false, false }; // fix_boarding_time
-																				// options
-																				// in
-																				// 4
-																				// cases
+		// fix_boarding_time options in 4 cases
+		boolean[] fixBoardingTime = new boolean[] { true, true, false, false }; 
 		int NUMRUNS = fixBoardingTime.length; // TODO needs modifying?
 
 		Seeds[] sds = new Seeds[NUMRUNS];

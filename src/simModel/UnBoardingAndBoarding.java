@@ -51,15 +51,13 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 		// RQ.Tracks[ID].Trains[0].leavingCustomers
 		// RQ.Tracks[ID].Trains[0].numCustomers *
 		// Constants.PERCENTAGE_OF_UNBOARDING[ID+1]
-		
+
 		for (int i = 0; i < model.gStations.length; i++) {
-			int numLeaving = (int) (numCustomersBoarding * Constants.PERCENTAGE_OF_UNBOARDING[i]);
-			if (id == i) {
-				train.setCustomerLeaving(id, 0);
-			} else {
-				train.setCustomerLeaving(id, train.getCustomerLeaving(id)
-						+ numLeaving);
-			}
+			int nextID = (id + 1) % model.gStations.length;
+			int numLeaving = (int) (numCustomersBoarding * model.dvp
+					.getPercentageOfCustomersLeaving(id, nextID));
+			train.setCustomerLeaving(id, train.getCustomerLeaving(id)
+					+ numLeaving);
 		}
 	}
 
