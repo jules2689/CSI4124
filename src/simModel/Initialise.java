@@ -22,46 +22,32 @@ class Initialise extends ScheduledAction {
 	public void actionEvent() {
 		// System Initialisation
 		// Add initilisation instructions
-		// initial 4 trains to trainGroup
 		
 		//Initialize an array for the purpose of this method
-		Train[] trains = new Train[model.numberOfTrains];
+		model.rcgTrains = new Trains[model.numberOfTrains];
 		
-		//Fill the array with trains
-		Train icTrain;
-		for (int i = 0; i < model.numberOfTrains; i++) {
-			icTrain = new Train(i, 0);
-			icTrain.status = Constants.TRAIN_STATUS_ARRIVED;
-			trains[i] = icTrain;
-		}
+		int numRemainderCars = model.numberOfCars%model.numberOfTrains;
 		
-		//Add cars to the trains
-		int trainId = 0;
-		for (int i = model.numberOfCars; i > 0; i--) {
-			icTrain = trains[trainId];
-			icTrain.addCar();
-			trainId = (trainId + 1) % trains.length;
-		}
-		
-		int constants[] = new int[]{Constants.FP, Constants.GI, Constants.SH, Constants.RC};
-		int constantPos = 0;
-		
-		//Add the trains to the group and the tracks
-		for (int i = 0; i < model.numberOfTrains; i++) {
-			icTrain = trains[i];
-			model.trains.insertGrp(icTrain);
-			int stationId = constants[constantPos];
-			model.tracks.trackGroup[stationId].trainGroup.add(icTrain); // put all trains on the track
-			constantPos = (constantPos + 1) % constants.length;
-			Debugger.debug(icTrain.toString(), 3);
+		for (int i = 0; i < model.numberOfTrains; i++){
+			int numCars = (int)(model.numberOfCars/model.numberOfTrains);
+			if (numRemainderCars > 0){
+				numCars++;
+				numRemainderCars--;
+			}
+			Trains train = new Trains(numCars,model.gStations.length);
+			train.status = Trains.StatusType.ARRIVED;
+			model.rcgTrains[i] = train;
+			
+			int stationID = i%model.rqTracks.length; //0 - 3
+			model.rqTracks[stationID].spInsertQue(train);
 		}
 		
 		// initialize of output
-		model.output.setTotalEvent(0);
+		/*model.output.setTotalEvent(0);
 		model.output.setType1BoardingEvent(0);
 		model.output.setType2BoardingEvent(0);
 		model.output.setType3BoardingEvent(0);
-		model.output.setType4BoardingEvent(0);
+		model.output.setType4BoardingEvent(0);*/
 	}
 
 }

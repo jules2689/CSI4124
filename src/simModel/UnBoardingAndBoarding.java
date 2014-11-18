@@ -1,119 +1,91 @@
 package simModel;
 
-import java.util.List;
-
 import absmodJ.ConditionalActivity;
 
 public class UnBoardingAndBoarding extends ConditionalActivity {
-	SMThemePark park;
-	List<Integer> idList;
+	SMThemePark model;
+	static int id;
 
 	public UnBoardingAndBoarding(SMThemePark park) {
-		this.park = park;
+		this.model = park;
 	}
 
-	protected static boolean precondition(SMThemePark park) {
-		Debugger.debug("===UnBoardingAndBoarding===precondition===START");
-		boolean returnValue = false;
-
-		List<Integer> idList = park.udp.stationReadyForUnboarding();
-		if (null != idList && idList.size() > 0) {
-			returnValue = true;
-		}
-
-		Debugger.debug("===UnBoardingAndBoarding===precondition===end:" + returnValue);
-		return returnValue;
+	protected static boolean precondition(SMThemePark model) {
+		// return none or an id
+		return model.udp.stationReadyForUnboarding() != Constants.NO_STATION;
 	}
 
 	@Override
 	protected double duration() {
-		// DVP.uLoadUnloadTime(boardingOption)
-		return park.dvp.uLoadUnloadTime(park.boardingOption);
+		return model.dvp.uLoadUnloadTime(model.boardingOption);
 	}
 
 	@Override
 	public void startingEvent() {
-		Debugger.debug("===UnBoardingAndBoarding===startingEvent===START");
-		Debugger.debug("===UnBoardingAndBoarding===printTrack:", 2);
-		park.printAllTrack();
+		id = model.udp.stationReadyForUnboarding();
+		Trains train = model.rqTracks[id].tracks.get(0);
+		Stations station = model.gStations[id];
+		// RQ.Tracks[ID].Trains[0] = BOARDING
+		train.status = Trains.StatusType.BOARDING;
+		// unboarding:
+		// RQ.Tracks[ID].Trains[0].numCustomers
+		// RQ.Tracks[ID].Trains[0].numCustomers -
+		// RQ.Tracks[ID].Trains[0].leavingCustomers
+		train.removeGrp(id, train.getCustomerLeaving(id));
 
-		this.idList = park.udp.stationReadyForUnboarding();// get all station identifier
+		int capacityAvailableForTrain = train.getAvailableCapacity();
+		int numCustomersBoarding = 0;
 
-		if (this.idList != null && this.idList.size() > 0) {
-			int id;
-			for (int k = 0; k < idList.size(); k++) {
-				id = idList.get(k).intValue();// ID
-				Track iTrack = park.tracks.trackGroup[id]; // RQ.Tracks[ID]
-				Train headTrain = iTrack.trainGroup.get(0);// RQ.Tracks[ID].Trains[0]
-				Station station = park.stations.stationGroup[id];
-				// RQ.Tracks[ID].Trains[0] = BOARDING
-				headTrain.status = Constants.TRAIN_STATUS_BOARDING;
-				// unboarding:
-				// RQ.Tracks[ID].Trains[0].numCustomers ��
-				// RQ.Tracks[ID].Trains[0].numCustomers -
-				// RQ.Tracks[ID].Trains[0].leavingCustomers
-				headTrain.numCustomers = headTrain.numCustomers - headTrain.getCustomerLeaving();
-				int capacityAvailableForTrain = headTrain.maxCustomers - headTrain.numCustomers;
-				
-				// boarding:
-				if (station.uNumCustomers >= capacityAvailableForTrain) {
-					// train is full, some customer cannot boarding
-					station.uNumCustomers = station.uNumCustomers - capacityAvailableForTrain;
-					headTrain.numCustomers = headTrain.maxCustomers;
-				} else {
-					// train is not full, all customers boarding in the train
-					headTrain.numCustomers = headTrain.numCustomers + station.uNumCustomers;
-					station.uNumCustomers = 0;
-				}
-				
-				setOutputForStation(station);
-				// update customer leaving at next station
-				// RQ.Tracks[ID].Trains[0].leavingCustomers ��
-				// RQ.Tracks[ID].Trains[0].numCustomers *
-				// Constants.PERCENTAGE_OF_UNBOARDING[ID+1]
-				int nextId = (id + 1) % 4;
-				headTrain.customerLeaving = (int) (headTrain.numCustomers * Constants.PERCENTAGE_OF_UNBOARDING[nextId]);
-				park.tracks.trackGroup[id].trainGroup.set(0, headTrain);
+		// boarding:
+		if (station.numCustomers >= capacityAvailableForTrain) {
+			// train is full, some customer cannot boarding
+			numCustomersBoarding = capacityAvailableForTrain;
+		} else {
+			// train is not full, all customers boarding in the train
+			numCustomersBoarding = station.numCustomers;
+		}
+		train.insertGrp(id, numCustomersBoarding);
+		station.removeGrp(numCustomersBoarding);
+
+		// update customer leaving at next station
+		// RQ.Tracks[ID].Trains[0].leavingCustomers
+		// RQ.Tracks[ID].Trains[0].numCustomers *
+		// Constants.PERCENTAGE_OF_UNBOARDING[ID+1]
+		
+		for (int i = 0; i < model.gStations.length; i++) {
+			int numLeaving = (int) (numCustomersBoarding * Constants.PERCENTAGE_OF_UNBOARDING[i]);
+			if (id == i) {
+				train.setCustomerLeaving(id, 0);
+			} else {
+				train.setCustomerLeaving(id, train.getCustomerLeaving(id)
+						+ numLeaving);
 			}
-
-			Debugger.debug("After boarding print:", 2);
-			this.park.printAllTrack();
-			Debugger.debug("===UnBoardingAndBoarding===startingEvent===end");
 		}
 	}
 
 	@Override
 	protected void terminatingEvent() {
-		if (this.idList != null && this.idList.size() > 0) {
-			int id;
-			for (int k = 0; k < this.idList.size(); k++) {
-				id = idList.get(k).intValue();// ID
-				ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(this.park, id);
-				// SP.Start(ExtraBoardingTime)
-				park.spStart(extraBoardingTime);
-			}
-		}
+		ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(this.model,
+				id);
+		model.spStart(extraBoardingTime);
 	}
-	
-	protected void setOutputForStation(Station stn) {
-		if (stn.uNumCustomers == 0) {
-			park.output.incrType1BoardingEvent();
-		} else if (stn.uNumCustomers >= 1 && stn.uNumCustomers < 25) {
-			park.output.incrType2BoardingEvent();
-		} else if (stn.uNumCustomers >= 25 && stn.uNumCustomers < 50) {
-			park.output.incrType3BoardingEvent();
-		} else {
-			park.output.incrType4BoardingEvent();
-		}
-		park.output.incrTotalEvent();
-		
-		Debugger.debug("\n\nStats for " + stn.name, 4);
-		Debugger.debug("Has... " + stn.uNumCustomers, 4);
-		Debugger.debug("Total Events : " + park.output.getTotalEvent(),4);
-		Debugger.debug("Total 1 : " + park.output.getType1BoardingEvent(),4);
-		Debugger.debug("Total 2 : " + park.output.getType2BoardingEvent(),4);
-		Debugger.debug("Total 3 : " + park.output.getType3BoardingEvent(),4);
-		Debugger.debug("Total 4 : " + park.output.getType4BoardingEvent() + "\n\n",4);
-	}
+
+	/*
+	 * protected void setOutputForStation(Station stn) { if (stn.uNumCustomers
+	 * == 0) { model.output.incrType1BoardingEvent(); } else if
+	 * (stn.uNumCustomers >= 1 && stn.uNumCustomers < 25) {
+	 * model.output.incrType2BoardingEvent(); } else if (stn.uNumCustomers >= 25
+	 * && stn.uNumCustomers < 50) { model.output.incrType3BoardingEvent(); }
+	 * else { model.output.incrType4BoardingEvent(); }
+	 * model.output.incrTotalEvent();
+	 * 
+	 * Debugger.debug("\n\nStats for " + stn.name, 4); Debugger.debug("Has... "
+	 * + stn.uNumCustomers, 4); Debugger.debug("Total Events : " +
+	 * model.output.getTotalEvent(), 4); Debugger.debug("Total 1 : " +
+	 * model.output.getType1BoardingEvent(), 4); Debugger.debug("Total 2 : " +
+	 * model.output.getType2BoardingEvent(), 4); Debugger.debug("Total 3 : " +
+	 * model.output.getType3BoardingEvent(), 4); Debugger.debug("Total 4 : " +
+	 * model.output.getType4BoardingEvent() + "\n\n", 4); }
+	 */
 
 }

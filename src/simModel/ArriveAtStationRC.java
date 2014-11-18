@@ -4,21 +4,20 @@ import absmodJ.ScheduledAction;
 
 public class ArriveAtStationRC extends ScheduledAction {
 
-	SMThemePark park;
+	SMThemePark model;
 
-	public ArriveAtStationRC(SMThemePark park) {
-		this.park = park;
+	public ArriveAtStationRC(SMThemePark model) {
+		this.model = model;
 	}
 
 	@Override
 	protected double timeSequence() {
-		return park.rvp.uCustomersGI();
+		return model.rvp.uCustomersRC();
 	}
 
 	@Override
 	protected void actionEvent() {
-		Station station = park.stations.stationGroup[Constants.RC];
-		station.uNumCustomers++;
+		model.gStations[Constants.RC].insertGrp(1);
 	}
 
 }

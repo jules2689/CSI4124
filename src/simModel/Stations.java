@@ -1,15 +1,24 @@
 package simModel;
 
 public class Stations {
+	protected int numCustomers;
+	public String name;
 
-	protected Station[] stationGroup = new Station[4];
+	public Stations(String name) {
+		this.name = name;
+	}
 
-	// protected HashSet<Station> stationGroup = new HashSet<Station>();
-	//
-	//
-	// // Required methods to manipulate the group
-	// protected void insertGrp(Station iStation) {stationGroup.add(iStation); }
-	// protected boolean removeGrp(Station iStation) {
-	// return(stationGroup.remove(iStation)); }
-	// protected int getN() { return stationGroup.size(); } // Attribute n
+	// Required methods to manipulate the group
+	protected void insertGrp(int customers) {
+		numCustomers += customers;
+	}
+
+	protected boolean removeGrp(int customers) {
+		numCustomers -= customers;
+		return (true);
+	}
+
+	protected int getN() {
+		return numCustomers;
+	} // Attribute n
 }

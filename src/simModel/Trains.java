@@ -1,29 +1,52 @@
 package simModel;
 
-import java.util.HashSet;
-
 public class Trains {
-	// Attributes
-	protected int numTrains; // Number of trains at the port - this attribute is
-								// a parameter
 
-	// For implementing the group, use a List object. //TODO
-	// Since all trains are running on the RG.Track,
-	// also, for convenience of adding trains, using List instead of HashSet
-	// protected List<Train> trainList = new ArrayList<Train>(); // maintains
-	// list of Train objects,
-	protected HashSet<Train> trainGroup = new HashSet<Train>();
+	protected static enum StatusType {
+		BOARDING, TRAVELLING, ARRIVED
+	};
 
-	// Required methods to manipulate the group
-	protected void insertGrp(Train iTrain) {
-		trainGroup.add(iTrain);
+	protected int numCars; // an integer value between 1 and 9 which represents
+							// the number of car
+
+	protected Integer[] numCustomers; // id matches station
+	protected Integer[] numLeavingCustomers; // id matches station
+
+	StatusType status;//
+
+	public Trains(int numCars, int numStations) {
+		this.numCars = numCars; // default length of train
+		numCustomers = new Integer[numStations];
+		numLeavingCustomers = new Integer[numStations];
 	}
 
-	protected boolean removeGrp(Train iTrain) {
-		return (trainGroup.remove(iTrain));
+	public int getCustomerLeaving(int id) {
+		return numLeavingCustomers[id];
+	}
+	
+	public void setCustomerLeaving(int id, int value){
+		numLeavingCustomers[id] = value;
+	}
+
+	// Required methods to manipulate the group
+	protected void insertGrp(int id, int customers) {
+		numCustomers[id] += customers;
+	}
+
+	protected boolean removeGrp(int id, int customers) {
+		numCustomers[id] -= customers;
+		return (true);
 	}
 
 	protected int getN() {
-		return trainGroup.size();
+		return numCustomers.length;
 	} // Attribute n
+
+	protected int getMaxNumberOfCustomers() {
+		return numCars * Constants.MAX_CUSTOMERS_PER_CAR;
+	}
+
+	protected int getAvailableCapacity() {
+		return getMaxNumberOfCustomers() - getN();
+	}
 }
