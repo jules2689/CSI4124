@@ -9,15 +9,15 @@ public class Trains {
 	protected int numCars; // an integer value between 1 and 9 which represents
 							// the number of car
 
-	protected Integer[] numCustomers; // id matches station
-	protected Integer[] numLeavingCustomers; // id matches station
+	protected int[] numCustomers; // id matches station
+	protected int[] numLeavingCustomers; // id matches station
 
 	StatusType status;//
 
 	public Trains(int numCars, int numStations) {
 		this.numCars = numCars; // default length of train
-		numCustomers = new Integer[numStations];
-		numLeavingCustomers = new Integer[numStations];
+		numCustomers = new int[numStations];
+		numLeavingCustomers = new int[numStations];
 	}
 
 	public int getCustomerLeaving(int id) {

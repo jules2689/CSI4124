@@ -44,7 +44,7 @@ class SMThemeParkExperi1 {
 					initialNumCars, boardingOptions[i], fixBoardingTime[i],
 					sds[i], false);
 			park.runSimulation();
-			//System.out.println("Percentage of Type 1 Events" + park.output.getPerctOfType1Scen());
+			park.outputResults();
 		}
 	}
 }

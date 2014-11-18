@@ -110,22 +110,23 @@ public class SMThemePark extends AOSimulationModel {
 
 		// test for unboarding and boarding
 		if (UnBoardingAndBoarding.precondition(this) == true) {
-			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate instance
+			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate
+																			// instance
 			act.startingEvent();
 			scheduleActivity(act);
 		}
 
 		// Check preconditions of Interruptions in Extended Activities
 		int num; // number of entries in list
-		int interruptionNum;  // interruption number
+		int interruptionNum; // interruption number
 		SBNotice nt;
 		Behaviour obj;
 		num = esbl.size();
-		
+
 		for (int i = 0; i < num; i++) {
 			nt = esbl.get(i);
 			obj = (esbl.get(i)).behaviourInstance;
-			
+
 			if (ExtSequelActivity.class.isInstance(obj)) {
 				ExtSequelActivity extSeqObj = (ExtSequelActivity) nt.behaviourInstance;
 				interruptionNum = extSeqObj.interruptionPreCond();
@@ -147,7 +148,7 @@ public class SMThemePark extends AOSimulationModel {
 			// show the SBL and verification here
 			this.showSBL();
 		}
-		// 
+		//
 		// System.out.println("***Total events:"+this.output.getTotalEvent());
 
 		// if(0 != this.output.getTotalEvent()){
@@ -182,6 +183,7 @@ public class SMThemePark extends AOSimulationModel {
 	protected double getClock() {
 		return super.getClock();
 	}
+
 	/*
 	 * // check if satisfied public boolean checkContinue() { boolean
 	 * continueflag = this.numberOfTrains < 9;
@@ -308,4 +310,25 @@ public class SMThemePark extends AOSimulationModel {
 	 * return results; }
 	 */
 
+	public void outputResults() {
+		System.out.println("Percentage of Type 1 Events: "
+				+ output.getPerctOfType1Scen());
+		System.out.println("Percentage of Type 2 Events: "
+				+ output.getPerctOfType2Scen());
+		System.out.println("Percentage of Type 3 Events: "
+				+ output.getPerctOfType3Scen());
+		System.out.println("Percentage of Type 4 Events: "
+				+ output.getPerctOfType4Scen());
+
+		int cost = 0;
+		cost += this.numberOfTrains * Constants.COST_OF_TRAIN;
+		cost += this.numberOfCars * Constants.COST_OF_CAR;
+
+		if (this.boardingOption == 0) {
+			cost += this.numberOfCars * Constants.COST_OF_BOARDING_OPTION_0;
+		} else if (this.boardingOption == 1) {
+			cost += this.numberOfCars * Constants.COST_OF_BOARDING_OPTION_1;
+		}
+		System.out.println("Cost: " + cost);
+	}
 }
