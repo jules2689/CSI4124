@@ -20,7 +20,7 @@ class SMThemeParkExperi1 {
 		for (int i = 0; i < NUMRUNS; i++) { sds[i] = new Seeds(rsg); }
 
 		// Number of Seeds
-		for (int i = 0; i < NUMRUNS; i++) {
+		for (int i = 0; i < 1; i++) {
 			Seeds seed = sds[i];
 			int runNumber = 1;
 			System.out.println("\n\n======================================================");
@@ -28,11 +28,11 @@ class SMThemeParkExperi1 {
 			System.out.println("======================================================\n");
 			
 			//For Each Train Scenario Within Seeds
-			for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
+			for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MIN_NUMBER_OF_TRAINS; numTrains++) {
 				//For Each Car Scenario Within Train
-				for (int numCars = Constants.MIN_NUMBER_OF_CARS; numCars <= Constants.MAX_NUMBER_OF_CARS; numCars++) { 
+				for (int numCars = Constants.MIN_NUMBER_OF_CARS*numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS*numTrains; numCars++) { 
 					//For Each Case Scenario Within Cars Within Trains
-					for (int x = 0; x < fixBoardingTime.length; x++) {
+					for (int x = 0; x < 1; x++) {
 						System.out.println("==========Case " + runNumber + ", Seed " + i + "==========");
 						System.out.println("Number of Cars: " + numCars + " Number of Trains: " + numTrains);
 						park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[x], fixBoardingTime[x], seed, true);
