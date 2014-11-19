@@ -12,3 +12,6 @@ hs_err_pid*
 
 .metadata*
 /bin/
+
+#log file for output
+log.txt

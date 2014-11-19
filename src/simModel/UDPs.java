@@ -77,13 +77,12 @@ public class UDPs {
 		// Constants.PERCENTAGE_OF_UNBOARDING[ID+1]
 
 		for (int i = 0; i < model.gStations.length; i++) {
-			int nextID = (id + 1) % model.gStations.length;
 			int numLeaving = (int) (numCustomersBoarding * model.dvp
-					.getPercentageOfCustomersLeaving(id, nextID));
+					.getPercentageOfCustomersLeaving(id, i));
 			if (i == id) {
-				train.setCustomerLeaving(id, 0);
+				train.setCustomerLeaving(i, 0);
 			} else {
-				train.setCustomerLeaving(id, train.getCustomerLeaving(id)
+				train.setCustomerLeaving(i, train.getCustomerLeaving(i)
 						+ numLeaving);
 			}
 		}

@@ -6,6 +6,7 @@ import absmodJ.Behaviour;
 // The Simulation model Class
 import absmodJ.ExtSequelActivity;
 import absmodJ.SBNotice;
+import absmodJ.ScheduledAction;
 import absmodJ.SequelActivity;
 
 public class SMThemePark extends AOSimulationModel {
@@ -137,6 +138,28 @@ public class SMThemePark extends AOSimulationModel {
 
 	protected void eventOccured() {
 		if (traceFlag) {
+			//only print the trace when there isn't an arrival because too many arrivals
+			if (!ScheduledAction.class.isInstance(this.sbl.peek().behaviourInstance)){
+				System.out.println("Clock: "+getClock()+": ");
+				for (int i = 0; i < this.gStations.length;i++){
+					System.out.println(gStations[i].name + " numCustomers="+ gStations[i].getN());
+					System.out.println(gStations[i].name + "'s Track size="+this.rqTracks[i].getN());
+					//look at the trains on the track for the station
+					for (int j = 0; j < this.rqTracks[i].getN(); j++){
+						Trains t = rqTracks[i].tracks.get(j);
+						System.out.println("Train "+ j + " numCustomers="+ t.getN() + " status="+t.status + " numleaving station="+t.getCustomerLeaving(i) + " availableCapacity="+t.getAvailableCapacity());
+					}
+					System.out.println();
+				}
+				
+				//print number of events
+				System.out.println("Number of Type 1 Events: " + output.getType1BoardingEvent());
+				System.out.println("Number of Type 2 Events: " + output.getType2BoardingEvent());
+				System.out.println("Number of Type 3 Events: " + output.getType3BoardingEvent());
+				System.out.println("Number of Type 4 Events: " + output.getType4BoardingEvent() + "\n");
+				
+				this.showSBL();
+			}
 			
 
 		}
@@ -176,138 +199,8 @@ public class SMThemePark extends AOSimulationModel {
 		return super.getClock();
 	}
 
-	/*
-	 * // check if satisfied public boolean checkContinue() { boolean
-	 * continueflag = this.numberOfTrains < 9;
-	 * 
-	 * if (continueflag) { System.out.println("************With " +
-	 * this.numberOfTrains + " Trains and " + this.numberOfCars +
-	 * " cars in total ***************");
-	 * System.out.println("******PerctOfType4Scen: " +
-	 * formatDoubleWithTwoPrecision(this.output .getPerctOfType4Scen()));
-	 * System.out.println("******PerctOfType3Scen: " +
-	 * formatDoubleWithTwoPrecision(this.output .getPerctOfType3Scen()));
-	 * System.out.println("******PerctOfType2Scen: " +
-	 * formatDoubleWithTwoPrecision(this.output .getPerctOfType2Scen()));
-	 * System.out.println("******PerctOfType1Scen: " +
-	 * formatDoubleWithTwoPrecision(this.output .getPerctOfType1Scen()));
-	 * 
-	 * double total = this.output.getPerctOfType4Scen() +
-	 * this.output.getPerctOfType3Scen() + this.output.getPerctOfType2Scen() +
-	 * this.output.getPerctOfType1Scen(); System.out.println("***TOTAL: " +
-	 * total);
-	 * 
-	 * if (checkGoalReached()) { System.out.println("****Reach the goal with  "
-	 * + this.numberOfTrains + " trains and " + this.numberOfCars +
-	 * " cars in total, at a cost of $" + this.cost()); }
-	 * 
-	 * if (this.numberOfCars == 72) { continueflag = false; }
-	 * 
-	 * System.out.println(""); }
-	 * 
-	 * Debugger.debug("check: " + continueflag); return continueflag; }
-	 * 
-	 * public boolean checkGoalReached() { return
-	 * this.output.getPerctOfType4Scen() == 0 &&
-	 * this.output.getPerctOfType3Scen() <= 5 &&
-	 * this.output.getPerctOfType2Scen() <= 10; }
-	 * 
-	 * // TODO Added Helper Method for Docs? private String
-	 * formatDoubleWithTwoPrecision(double decimal) { return new
-	 * DecimalFormat("#0.00").format(decimal); }
-	 * 
-	 * // reset with increament of train public void resetWithIncre() {
-	 * Debugger.debug("==resetWithIncre start:"); this.numberOfCars++;
-	 * 
-	 * if (this.numberOfCars > this.numberOfTrains * 9) { // if reach maximum //
-	 * cars, increase // train and restart // with min cars
-	 * this.numberOfTrains++; this.numberOfCars = this.numberOfTrains * 4;
-	 * Debugger.debug(
-	 * "\n\n================================================\n================= NEW TRAIN "
-	 * + this.numberOfTrains +
-	 * " ==================\n================================================\n\n"
-	 * , 4); }
-	 * 
-	 * // reset uNumCustomers in stations for (int i = 0; i <
-	 * this.stations.stationGroup.length; i++) {
-	 * this.stations.stationGroup[i].uNumCustomers = 0; }
-	 * 
-	 * // remove all train from track for (int i = 0; i <
-	 * this.tracks.trackGroup.length; i++) {
-	 * this.tracks.trackGroup[i].trainGroup = new ArrayList<Train>(); }
-	 * 
-	 * initAOSimulModel(0.0, this.closingTime); Initialise init = new
-	 * Initialise(this); this.printAllTrack(); scheduleAction(init); // Should
-	 * always be first one scheduled. // Schedule other scheduled actions and
-	 * activities here
-	 * 
-	 * // Schedule the first arrivals ArriveAtStationFP arrivalFP = new
-	 * ArriveAtStationFP(this); scheduleAction(arrivalFP); // customer arrive at
-	 * FP
-	 * 
-	 * ArriveAtStationGI arrivalGI = new ArriveAtStationGI(this);
-	 * scheduleAction(arrivalGI); // customer arrive at FP
-	 * 
-	 * ArriveAtStationRC arrivalRC = new ArriveAtStationRC(this);
-	 * scheduleAction(arrivalRC); // customer arrive at FP
-	 * 
-	 * ArriveAtStationSH arrivalSH = new ArriveAtStationSH(this);
-	 * scheduleAction(arrivalSH); // customer arrive at FP
-	 * 
-	 * Debugger.debug("==resetWithIncre end==with numberOfCars:" +
-	 * this.numberOfCars + " and numberOfTrains:" + this.numberOfTrains, 2);
-	 * this.runSimulation(); }
-	 * 
-	 * @Override public String toString() { String string = this.numberOfTrains
-	 * + " trains\n" + this.numberOfCars + " cars\n";
-	 * 
-	 * if (this.boardingOption == 0) { string +=
-	 * "boarding option: single-sided\n"; } else { string +=
-	 * "boarding option: double-sided\n"; }
-	 * 
-	 * if (fixBoardingTime) { string += "Fixed boarding time\n"; } else { string
-	 * += "Unfixed boarding time\n"; }
-	 * 
-	 * string += "Cost of scenario : $" + this.cost() + "\n";
-	 * 
-	 * return string; }
-	 * 
-	 * // TODO : Add to doc public int cost() { int cost = this.numberOfTrains *
-	 * Constants.COST_OF_TRAIN; if (this.boardingOption == 1) { cost +=
-	 * this.numberOfCars * (Constants.COST_OF_CAR + 20); } else { cost +=
-	 * this.numberOfCars * Constants.COST_OF_CAR; } return cost; }
-	 * 
-	 * public SMThemePark shallowClone() { SMThemePark park = new SMThemePark();
-	 * park.fixBoardingTime = this.fixBoardingTime; park.boardingOption =
-	 * this.boardingOption; park.numberOfTrains = this.numberOfTrains;
-	 * park.numberOfCars = this.numberOfCars; return park; }
-	 * 
-	 * // TODO method for debug DELETE public void printAllTrack() { for (int i
-	 * = 0; i < this.tracks.trackGroup.length; i++) { Track track =
-	 * this.tracks.trackGroup[i]; Station stn = this.stations.stationGroup[i];
-	 * Debugger.debug("########Track " + i + ":", 2);
-	 * Debugger.debug("###Station cust:" + stn.uNumCustomers, 2); if
-	 * (track.trainGroup.size() > 0) { Train train; for (int j = 0; j <
-	 * track.trainGroup.size(); j++) { train = track.trainGroup.get(j);
-	 * Debugger.debug("###train index:" + j + " ###train number:" +
-	 * train.trainId + "###numCars:" + train.numCars + " ###train cust:" +
-	 * train.numCustomers + " ###train status:" + train.status, 2); } } } }
-	 * 
-	 * // TODO method for debug DELETE public double[] currentStats() { double[]
-	 * results = new double[4]; results[0] = this.output.getPerctOfType1Scen();
-	 * results[1] = this.output.getPerctOfType2Scen(); results[2] =
-	 * this.output.getPerctOfType3Scen(); results[3] =
-	 * this.output.getPerctOfType4Scen();
-	 * 
-	 * return results; }
-	 */
 
 	public void outputResults() {
-		
-		/*System.out.println("Station FP:" + this.gStations[Constants.FP].numCustomers);
-		System.out.println("Station SH:" + this.gStations[Constants.SH].numCustomers);
-		System.out.println("Station GI:" + this.gStations[Constants.GI].numCustomers);
-		System.out.println("Station RC:" + this.gStations[Constants.RC].numCustomers);*/
 		
 		System.out.println("Percentage of Type 1 Events: " + output.getPerctOfType1Scen());
 		System.out.println("Percentage of Type 2 Events: " + output.getPerctOfType2Scen());

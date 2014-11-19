@@ -33,9 +33,9 @@ class SMThemeParkExperi1 {
 				for (int numCars = Constants.MIN_NUMBER_OF_CARS*numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS*numTrains; numCars++) { 
 					//For Each Case Scenario Within Cars Within Trains
 					for (int x = 0; x < 1; x++) {
-						System.out.println("==========Case " + runNumber + ", Seed " + i + "==========");
+						System.out.println("==========Case " + (x+1) + ", Seed " + i + ", Run Number " + runNumber + "==========");
 						System.out.println("Number of Cars: " + numCars + " Number of Trains: " + numTrains);
-						park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[x], fixBoardingTime[x], seed, true);
+						park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[x], fixBoardingTime[x], seed, false);
 						park.runSimulation();
 						park.outputResults();
 						runNumber++;

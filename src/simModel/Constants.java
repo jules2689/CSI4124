@@ -20,7 +20,7 @@ public class Constants {
 	protected final static int MAX_CUSTOMERS_PER_CAR = 25; // the maximum number of customers per car
 	public final static int MIN_NUMBER_OF_TRAINS = 4; // the minimum number of trains in the system
 	public final static int MAX_NUMBER_OF_TRAINS = 8; // the maximum number of trains in the system
-	public final static int MIN_NUMBER_OF_CARS = 1; // the minimum number of cars in the system
+	public final static int MIN_NUMBER_OF_CARS = 4; // the minimum number of cars in the system; experiment starts with min 4
 	public final static int MAX_NUMBER_OF_CARS = 9; // the maximum number of cars in the system
 
 	//TODO add to document
