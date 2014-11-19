@@ -11,8 +11,10 @@ class SMThemeParkExperi1 {
 		double startTime = 0.0, endTime = 750.0;
 		SMThemePark park; // Simulation object
 		int NUMRUNS = 30; // TODO needs modifying?
-		int[] boardingOptions = new int[] { 0, 1, 0, 1 }; // boarding options in
-															// 4 cases
+		int[] boardingOptions = new int[] { Constants.SINGLE_SIDED,
+				Constants.DOUBLE_SIDED, Constants.SINGLE_SIDED,
+				Constants.DOUBLE_SIDED }; // boarding options in
+		// 4 cases
 		boolean[] fixBoardingTime = new boolean[] { true, true, false, false }; // fix_boarding_time
 																				// options
 																				// in
@@ -41,8 +43,7 @@ class SMThemeParkExperi1 {
 			for (int x = 0; x < boardingOptions.length; x++) {
 				System.out.println("\n");
 				// For Each Train Scenario Within Seeds
-				traincarloop:
-				for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
+				traincarloop: for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
 					// For Each Car Scenario Within Train
 					for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS
 							* numTrains; numCars++) {

@@ -220,9 +220,9 @@ public class SMThemePark extends AOSimulationModel {
 		cost += this.numberOfCars * Constants.COST_OF_CAR;
 
 		if (this.boardingOption == 0) {
-			cost += this.numberOfCars * Constants.COST_OF_BOARDING_OPTION_0;
+			cost += this.numberOfCars * Constants.COST_OF_SINGLE_SIDED;
 		} else if (this.boardingOption == 1) {
-			cost += this.numberOfCars * Constants.COST_OF_BOARDING_OPTION_1;
+			cost += this.numberOfCars * Constants.COST_OF_DOUBLE_SIDED;
 		}
 		System.out.println("Cost: " + cost);
 	}

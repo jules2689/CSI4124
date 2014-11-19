@@ -17,7 +17,7 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 
 	@Override
 	protected double duration() {
-		return model.dvp.uLoadUnloadTime(model.boardingOption);
+		return model.dvp.uLoadUnloadTime();
 	}
 
 	@Override

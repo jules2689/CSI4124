@@ -9,8 +9,8 @@ class DVPs {
 	}
 
 	// boardingOption
-	protected double uLoadUnloadTime(int boardingOption) {
-		if (boardingOption == 1) {
+	protected double uLoadUnloadTime() {
+		if (model.boardingOption == 1) {
 			return 1.25; // double sided
 		} else {
 			return 2.0; // single sided
