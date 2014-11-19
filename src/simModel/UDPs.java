@@ -13,8 +13,8 @@ public class UDPs {
 	public boolean checkTrainArrived(int id) {
 		Tracks track = model.rqTracks[id];
 		// at least two trains are on the track
-		if (track.tracks != null && track.getN() > 1) {
-			Trains t2 = track.tracks.get(1);
+		if (track.trainList != null && track.getN() > 1) {
+			Trains t2 = track.trainList.get(1);
 			if (t2.status == Trains.StatusType.ARRIVED) {
 				return true;
 			}
@@ -27,7 +27,7 @@ public class UDPs {
 		for (int i = 0; i < model.rqTracks.length; i++) {
 			Tracks track = model.rqTracks[i];
 			if (track != null && track.getN() > 0) {
-				Trains headTrain = track.tracks.get(0);
+				Trains headTrain = track.trainList.get(0);
 				if (headTrain.status == Trains.StatusType.ARRIVED) {
 					return i;
 				}
@@ -50,7 +50,7 @@ public class UDPs {
 	}
 
 	protected void boardAtStation(int id) {
-		Trains train = model.rqTracks[id].tracks.get(0);
+		Trains train = model.rqTracks[id].trainList.get(0);
 		Stations station = model.gStations[id];
 
 		int capacityAvailableForTrain = train.getAvailableCapacity();
