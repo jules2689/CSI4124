@@ -8,31 +8,41 @@ import cern.jet.random.engine.*;
 // 
 class SMThemeParkExperi1 {
 	public static void main(String[] args) {
-		int i = 4; // total 4 cases
 		double startTime = 0.0, endTime = 750.0;
 		SMThemePark park; // Simulation object
-		int initialNumTrains = 4;
-		int initialNumCars = 16;
+		int NUMRUNS = 30; // TODO needs modifying?
+		int[] boardingOptions = new int[] { 0, 1, 0, 1 }; // boarding options in 4 cases
+		boolean[] fixBoardingTime = new boolean[] { true, true, false, false }; // fix_boarding_time options in 4 cases
 
-		int[] boardingOptions = new int[] { 0, 1, 0, 1 }; // boarding options in
-															// 4 cases
-		// fix_boarding_time options in 4 cases
-		boolean[] fixBoardingTime = new boolean[] { true, true, false, false }; 
-		int NUMRUNS = fixBoardingTime.length; // TODO needs modifying?
-
-		Seeds[] sds = new Seeds[NUMRUNS];
 		// Lets get a set of uncorrelated seeds
+		Seeds[] sds = new Seeds[NUMRUNS];
 		RandomSeedGenerator rsg = new RandomSeedGenerator();
-		for (i = 0; i < NUMRUNS; i++) {
-			sds[i] = new Seeds(rsg);
-		}
+		for (int i = 0; i < NUMRUNS; i++) { sds[i] = new Seeds(rsg); }
 
-		for (i = 0; i < 1; i++) {
-			System.out.println("==========Case " + i + "==========");
-			System.out.println("Number of Cars: " + initialNumCars + " Number of Trains: " + initialNumTrains);
-			park = new SMThemePark(startTime, endTime, initialNumTrains, initialNumCars, boardingOptions[i], fixBoardingTime[i], sds[i], true);
-			park.runSimulation();
-			park.outputResults();
+		// Number of Seeds
+		for (int i = 0; i < NUMRUNS; i++) {
+			Seeds seed = sds[i];
+			int runNumber = 1;
+			System.out.println("\n\n======================================================");
+			System.out.println("=======================SEED #" + i + "========================");
+			System.out.println("======================================================\n");
+			
+			//For Each Train Scenario Within Seeds
+			for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains < Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
+				//For Each Car Scenario Within Train
+				for (int numCars = Constants.MIN_NUMBER_OF_CARS; numCars < Constants.MAX_NUMBER_OF_CARS; numCars += numTrains) { // Add numTrains because we need to evenly distribute cars.
+					//For Each Case Scenario Within Cars Within Trains
+					for (int x = 0; x < fixBoardingTime.length; x++) {
+						System.out.println("==========Case " + runNumber + ", Seed " + i + "==========");
+						System.out.println("Number of Cars: " + numCars + " Number of Trains: " + numTrains);
+						park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[x], fixBoardingTime[x], seed, true);
+						park.runSimulation();
+						park.outputResults();
+						runNumber++;
+					}
+				}
+			}
 		}
+		
 	}
 }
