@@ -34,11 +34,16 @@ class Initialise extends ScheduledAction {
 				numCars++;
 				numRemainderCars--;
 			}
+			//RCG.Trains[ID].status ← ARRIVED (Done in the construction method)
+			//RCG.Trains[ID].numCars ← numCars (Done in the construction method)
 			Trains train = new Trains(numCars,model.gStations.length);
 			train.status = Trains.StatusType.ARRIVED;
 			model.rcgTrains[i] = train;
 			
-			int stationID = i%model.rqTracks.length; //0 - 3
+			//Initialize trains in the station. 
+			//Suppose that before the park is open, the trains is already put in different stations 
+			//in order to service customer more efficiently
+			int stationID = i % model.rqTracks.length; //0 - 3
 			model.rqTracks[stationID].spInsertQue(train);
 		}
 	}
