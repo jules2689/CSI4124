@@ -14,10 +14,8 @@ public class UDPs {
 		Tracks track = model.rqTracks[id];
 		// at least two trains are on the track
 		if (track.tracks != null && track.getN() > 1) {
-			Trains t1 = track.tracks.get(0);
 			Trains t2 = track.tracks.get(1);
-			if (t1.status == Trains.StatusType.ARRIVED
-					&& t2.status == Trains.StatusType.ARRIVED) {
+			if (t2.status == Trains.StatusType.ARRIVED) {
 				return true;
 			}
 		}

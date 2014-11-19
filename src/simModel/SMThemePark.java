@@ -215,15 +215,6 @@ public class SMThemePark extends AOSimulationModel {
 		System.out.println("Percentage of Type 4 Events: "
 				+ output.getPerctOfType4Scen());
 
-		int cost = 0;
-		cost += this.numberOfTrains * Constants.COST_OF_TRAIN;
-		cost += this.numberOfCars * Constants.COST_OF_CAR;
-
-		if (this.boardingOption == 0) {
-			cost += this.numberOfCars * Constants.COST_OF_SINGLE_SIDED;
-		} else if (this.boardingOption == 1) {
-			cost += this.numberOfCars * Constants.COST_OF_DOUBLE_SIDED;
-		}
-		System.out.println("Cost: " + cost);
+		System.out.println("Cost: " + output.getCost());
 	}
 }

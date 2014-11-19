@@ -2,11 +2,11 @@ package simModel;
 
 class Output {
 
-	SMThemePark park;
+	SMThemePark model;
 
 	// Constructor
 	Output(SMThemePark model) {
-		this.park = model;
+		this.model = model;
 	}
 
 	// SSOVs
@@ -101,12 +101,18 @@ class Output {
 	public void incrType4BoardingEvent() {
 		this.type4BoardingEvent++;
 	}
+	
+	public int getCost(){
+		int cost = 0;
+		cost += model.numberOfTrains * Constants.COST_OF_TRAIN;
+		cost += model.numberOfCars * Constants.COST_OF_CAR;
 
-	// public void reset(){
-	// this.setTotalEvent(0);
-	// this.setType1BoardingEvent(0);
-	// this.setType2BoardingEvent(0);
-	// this.setType3BoardingEvent(0);
-	// this.setType4BoardingEvent(0);
-	// }
+		if (model.boardingOption == 0) {
+			cost += model.numberOfCars * Constants.COST_OF_SINGLE_SIDED;
+		} else if (model.boardingOption == 1) {
+			cost += model.numberOfCars * Constants.COST_OF_DOUBLE_SIDED;
+		}
+		return cost;
+	}
+
 }

@@ -41,13 +41,6 @@ class Initialise extends ScheduledAction {
 			int stationID = i%model.rqTracks.length; //0 - 3
 			model.rqTracks[stationID].spInsertQue(train);
 		}
-		
-		// initialize of output
-		/*model.output.setTotalEvent(0);
-		model.output.setType1BoardingEvent(0);
-		model.output.setType2BoardingEvent(0);
-		model.output.setType3BoardingEvent(0);
-		model.output.setType4BoardingEvent(0);*/
 	}
 
 }

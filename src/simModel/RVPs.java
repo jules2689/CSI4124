@@ -82,16 +82,6 @@ class RVPs {
 		interArrDistRC = new Exponential(1.0 / MEAN_ARRL_RC_1,new MersenneTwister(sd.arrRC));
 	}
 
-	// protected double duInput() // for getting next value of uW(t)
-	// {
-	// double nxtInterArr;
-	//
-	// nxtInterArr = interArrDist.nextDouble();
-	// // Note that interarrival time is added to current
-	// // clock value to get the next arrival time.
-	// return(nxtInterArr+model.getClock());
-	// }
-
 	//
 	protected double uCustomersFP() {
 		double mean = getMeanTime();
@@ -130,6 +120,7 @@ class RVPs {
 	}
 
 	//TODO: Add to Documentation
+	//TODO JULIAN FIX THE FUCKING THING
 	protected double getMeanTime() {
 		double mean;
 
