@@ -313,6 +313,11 @@ public class SMThemePark extends AOSimulationModel {
 		System.out.println("Percentage of Type 2 Events: " + output.getPerctOfType2Scen());
 		System.out.println("Percentage of Type 3 Events: " + output.getPerctOfType3Scen());
 		System.out.println("Percentage of Type 4 Events: " + output.getPerctOfType4Scen());
+		
+		System.out.println("Percentage of Type 1 Events: " + output.getType1BoardingEvent());
+		System.out.println("Percentage of Type 2 Events: " + output.getType2BoardingEvent());
+		System.out.println("Percentage of Type 3 Events: " + output.getType3BoardingEvent());
+		System.out.println("Percentage of Type 4 Events: " + output.getType4BoardingEvent());
 
 		int cost = 0;
 		cost += this.numberOfTrains * Constants.COST_OF_TRAIN;

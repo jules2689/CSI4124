@@ -59,9 +59,9 @@ public class UDPs {
 		int numCustomersBoarding = 0;
 
 		// boarding:
-		
+
 		if (station.numCustomers >= capacityAvailableForTrain) {
-			
+
 			// train is full, some customer cannot boarding
 			numCustomersBoarding = capacityAvailableForTrain;
 		} else {
@@ -80,8 +80,12 @@ public class UDPs {
 			int nextID = (id + 1) % model.gStations.length;
 			int numLeaving = (int) (numCustomersBoarding * model.dvp
 					.getPercentageOfCustomersLeaving(id, nextID));
-			train.setCustomerLeaving(id, train.getCustomerLeaving(id)
-					+ numLeaving);
+			if (i == id) {
+				train.setCustomerLeaving(id, 0);
+			} else {
+				train.setCustomerLeaving(id, train.getCustomerLeaving(id)
+						+ numLeaving);
+			}
 		}
 	}
 }

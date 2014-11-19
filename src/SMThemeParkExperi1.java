@@ -28,9 +28,9 @@ class SMThemeParkExperi1 {
 			System.out.println("======================================================\n");
 			
 			//For Each Train Scenario Within Seeds
-			for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains < Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
+			for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
 				//For Each Car Scenario Within Train
-				for (int numCars = Constants.MIN_NUMBER_OF_CARS; numCars < Constants.MAX_NUMBER_OF_CARS; numCars += numTrains) { // Add numTrains because we need to evenly distribute cars.
+				for (int numCars = Constants.MIN_NUMBER_OF_CARS; numCars <= Constants.MAX_NUMBER_OF_CARS; numCars++) { 
 					//For Each Case Scenario Within Cars Within Trains
 					for (int x = 0; x < fixBoardingTime.length; x++) {
 						System.out.println("==========Case " + runNumber + ", Seed " + i + "==========");
