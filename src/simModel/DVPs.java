@@ -10,7 +10,7 @@ class DVPs {
 
 	// boardingOption
 	protected double uLoadUnloadTime() {
-		if (model.boardingOption == 1) {
+		if (model.boardingOption == Constants.DOUBLE_SIDED) {
 			return 1.25; // double sided
 		} else {
 			return 2.0; // single sided
@@ -28,18 +28,6 @@ class DVPs {
 		default:
 			return 6.0;
 		}
-	}
-
-	protected double getEmpNum() // for getting next value of EmpNum(t)
-	{
-		double nextTime;
-		if (model.getClock() <= 660.0) {
-			nextTime = model.getClock() + 60.0;
-		} else {
-			nextTime = -1;
-		}
-
-		return nextTime;
 	}
 
 	protected double getPercentageOfCustomersLeaving(int fromStation, int toStation) {
