@@ -84,7 +84,7 @@ class RVPs {
 
 	//
 	protected double uCustomersFP() {
-		double mean = getMeanTime();
+		double mean = getMeanTimeFP();
 		double nxtArrival = model.getClock() + interArrDistFP.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
@@ -93,7 +93,7 @@ class RVPs {
 	}
 
 	protected double uCustomersSH() {
-		double mean = getMeanTime();
+		double mean = getMeanTimeSH();
 		double nxtArrival = model.getClock() + interArrDistSH.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
@@ -102,7 +102,7 @@ class RVPs {
 	}
 
 	protected double uCustomersGI() {
-		double mean = getMeanTime();
+		double mean = getMeanTimeGI();
 		double nxtArrival = model.getClock() + interArrDistGI.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
@@ -111,7 +111,7 @@ class RVPs {
 	}
 
 	protected double uCustomersRC() {
-		double mean = getMeanTime();
+		double mean = getMeanTimeRC();
 		double nxtArrival = model.getClock() + interArrDistRC.nextDouble(1.0 / mean);
 		if (nxtArrival > model.closingTime) {
 			nxtArrival = -1.0; // Ends time sequence
@@ -120,8 +120,100 @@ class RVPs {
 	}
 
 	//TODO: Add to Documentation
-	//TODO JULIAN FIX THE FUCKING THING
-	protected double getMeanTime() {
+	protected double getMeanTimeFP() {
+		double mean;
+
+		if (model.getClock() < 60)
+			mean = MEAN_ARRL_FP_1;
+		else if (model.getClock() < 120)
+			mean = MEAN_ARRL_FP_2;
+		else if (model.getClock() < 180)
+			mean = MEAN_ARRL_FP_3;
+		else if (model.getClock() < 240)
+			mean = MEAN_ARRL_FP_4;
+		else if (model.getClock() < 300)
+			mean = MEAN_ARRL_FP_5;
+		else if (model.getClock() < 360)
+			mean = MEAN_ARRL_FP_6;
+		else if (model.getClock() < 420)
+			mean = MEAN_ARRL_FP_7;
+		else if (model.getClock() < 480)
+			mean = MEAN_ARRL_FP_8;
+		else if (model.getClock() < 540)
+			mean = MEAN_ARRL_FP_9;
+		else if (model.getClock() < 600)
+			mean = MEAN_ARRL_FP_10;
+		else if (model.getClock() < 660)
+			mean = MEAN_ARRL_FP_11;
+		else
+			mean = MEAN_ARRL_FP_12;
+
+		return mean;
+	}
+	
+	protected double getMeanTimeSH() {
+		double mean;
+
+		if (model.getClock() < 60)
+			mean = MEAN_ARRL_SH_1;
+		else if (model.getClock() < 120)
+			mean = MEAN_ARRL_SH_2;
+		else if (model.getClock() < 180)
+			mean = MEAN_ARRL_SH_3;
+		else if (model.getClock() < 240)
+			mean = MEAN_ARRL_SH_4;
+		else if (model.getClock() < 300)
+			mean = MEAN_ARRL_SH_5;
+		else if (model.getClock() < 360)
+			mean = MEAN_ARRL_SH_6;
+		else if (model.getClock() < 420)
+			mean = MEAN_ARRL_SH_7;
+		else if (model.getClock() < 480)
+			mean = MEAN_ARRL_SH_8;
+		else if (model.getClock() < 540)
+			mean = MEAN_ARRL_SH_9;
+		else if (model.getClock() < 600)
+			mean = MEAN_ARRL_SH_10;
+		else if (model.getClock() < 660)
+			mean = MEAN_ARRL_SH_11;
+		else
+			mean = MEAN_ARRL_SH_12;
+
+		return mean;
+	}
+	
+	protected double getMeanTimeGI() {
+		double mean;
+
+		if (model.getClock() < 60)
+			mean = MEAN_ARRL_GI_1;
+		else if (model.getClock() < 120)
+			mean = MEAN_ARRL_GI_2;
+		else if (model.getClock() < 180)
+			mean = MEAN_ARRL_GI_3;
+		else if (model.getClock() < 240)
+			mean = MEAN_ARRL_GI_4;
+		else if (model.getClock() < 300)
+			mean = MEAN_ARRL_GI_5;
+		else if (model.getClock() < 360)
+			mean = MEAN_ARRL_GI_6;
+		else if (model.getClock() < 420)
+			mean = MEAN_ARRL_GI_7;
+		else if (model.getClock() < 480)
+			mean = MEAN_ARRL_GI_8;
+		else if (model.getClock() < 540)
+			mean = MEAN_ARRL_GI_9;
+		else if (model.getClock() < 600)
+			mean = MEAN_ARRL_GI_10;
+		else if (model.getClock() < 660)
+			mean = MEAN_ARRL_GI_11;
+		else
+			mean = MEAN_ARRL_GI_12;
+
+		return mean;
+	}
+	
+	protected double getMeanTimeRC() {
 		double mean;
 
 		if (model.getClock() < 60)
