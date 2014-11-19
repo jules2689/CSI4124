@@ -28,7 +28,7 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 				flagValue = 3;
 			}
 		}
-
+		
 		return flagValue;
 	}
 

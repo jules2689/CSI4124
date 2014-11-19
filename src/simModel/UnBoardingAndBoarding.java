@@ -31,7 +31,7 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 		// RQ.Tracks[ID].Trains[0].numCustomers -
 		// RQ.Tracks[ID].Trains[0].leavingCustomers
 		train.removeGrp(id, train.getCustomerLeaving(id));
-		//boarding done in extra boarding time
+		//as discussed in class, boarding is to take place at the end of extra boarding time
 	}
 
 	@Override

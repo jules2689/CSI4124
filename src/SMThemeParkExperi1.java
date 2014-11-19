@@ -35,10 +35,11 @@ class SMThemeParkExperi1 {
 			System.out.println("=======================SEED #" + i
 					+ "========================");
 			System.out
-					.println("======================================================\n");
+					.println("======================================================");
 
 			// For Each Case Scenario Within Cars Within Trains
-			for (int x = 0; x < 1; x++) {
+			for (int x = 0; x < boardingOptions.length; x++) {
+				System.out.println("\n");
 				// For Each Train Scenario Within Seeds
 				traincarloop:
 				for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {

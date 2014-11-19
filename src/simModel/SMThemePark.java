@@ -182,29 +182,6 @@ public class SMThemePark extends AOSimulationModel {
 			}
 
 		}
-		//
-		// System.out.println("***Total events:"+this.output.getTotalEvent());
-
-		// if(0 != this.output.getTotalEvent()){
-		// System.out.println("***type1BoardingEvent:"+this.output.getType1BoardingEvent()
-		// +
-		// " Percentage:" + this.output.getPerctOfType1Scen() + "%");
-		// System.out.println("***type2BoardingEvent:"+this.output.getType2BoardingEvent()
-		// +
-		// " Percentage:" + this.output.getPerctOfType2Scen() + "%");
-		// System.out.println("***type3BoardingEvent:"+this.output.getType3BoardingEvent()
-		// +
-		// " Percentage:" + this.output.getPerctOfType3Scen() + "%");
-		// System.out.println("***type4BoardingEvent:"+this.output.getType4BoardingEvent()
-		// +
-		// " Percentage:" + this.output.getPerctOfType4Scen() + "%");
-		// }
-		// Can add other debug code to monitor the status of the system
-		// See examples for suggestions on setup logging
-
-		// Setup an updateTrjSequences() method in the Output class
-		// and call here if you have Trajectory Sets
-		// updateTrjSequences()
 	}
 
 	// Standard Procedure to start Sequel Activities with no parameters
