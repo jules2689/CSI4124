@@ -18,7 +18,4 @@ public class Stations {
 		return (true);
 	}
 
-	protected int getN() {
-		return numCustomers;
-	} // Attribute n
 }

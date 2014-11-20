@@ -152,7 +152,7 @@ public class SMThemePark extends AOSimulationModel {
 				System.out.println("Clock: " + getClock() + ": ");
 				for (int i = 0; i < this.gStations.length; i++) {
 					System.out.println(gStations[i].name + " numCustomers="
-							+ gStations[i].getN());
+							+ gStations[i].numCustomers);
 					System.out.println(gStations[i].name + "'s Track size="
 							+ this.rqTracks[i].getN());
 					// look at the trains on the track for the station
