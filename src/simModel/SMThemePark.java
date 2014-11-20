@@ -196,8 +196,8 @@ public class SMThemePark extends AOSimulationModel {
 	public boolean projectGoalReached() {
 		boolean result = false;
 		if (this.output.getPerctOfType4Scen() == 0.0
-				&& this.output.getPerctOfType2Scen() <= 5.0
-				&& this.output.getPerctOfType3Scen() <= 10.0) {
+				&& this.output.getPerctOfType3Scen() <= 5.0
+				&& this.output.getPerctOfType2Scen() <= 10.0) {
 			result = true;
 		}
 		return result;
