@@ -160,10 +160,8 @@ public class SMThemePark extends AOSimulationModel {
 						Trains t = rqTracks[i].trainList.get(j);
 						System.out.println("Train " + j + " numCustomers="
 								+ t.getN() + " status=" + t.status
-								+ " numleaving station="
-								+ t.getCustomerLeaving(i)
-								+ " availableCapacity="
-								+ t.getAvailableCapacity());
+								+ " numLeavingCustomers="
+								+ t.numLeavingCustomers[i]);
 					}
 					System.out.println();
 				}
@@ -215,6 +213,6 @@ public class SMThemePark extends AOSimulationModel {
 		System.out.println("Percentage of Type 4 Events: "
 				+ output.getPerctOfType4Scen());
 
-		System.out.println("Cost: " + output.getCost());
+		System.out.println("Cost: " + udp.getCost());
 	}
 }

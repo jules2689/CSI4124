@@ -53,7 +53,7 @@ public class UDPs {
 		Trains train = model.rqTracks[id].trainList.get(0);
 		Stations station = model.gStations[id];
 
-		int capacityAvailableForTrain = train.getAvailableCapacity();
+		int capacityAvailableForTrain = getAvailableCapacity(train);
 		int numCustomersBoarding = 0;
 
 		// boarding:
@@ -66,7 +66,7 @@ public class UDPs {
 			// train is not full, all customers boarding in the train
 			numCustomersBoarding = station.numCustomers;
 		}
-		train.insertGrp(id, numCustomersBoarding);
+		train.numCustomers[id] += numCustomersBoarding;
 		station.removeGrp(numCustomersBoarding);
 
 		// update customer leaving at next station
@@ -78,11 +78,31 @@ public class UDPs {
 			int numLeaving = (int) (numCustomersBoarding * model.dvp
 					.getPercentageOfCustomersLeaving(id, i));
 			if (i == id) {
-				train.setCustomerLeaving(i, 0);
+				train.numLeavingCustomers[i] = 0;
 			} else {
-				train.setCustomerLeaving(i, train.getCustomerLeaving(i)
-						+ numLeaving);
+				train.numLeavingCustomers[i] += numLeaving;
 			}
 		}
+	}
+	
+	public int getCost(){
+		int cost = 0;
+		cost += model.numberOfTrains * Constants.COST_OF_TRAIN;
+		cost += model.numberOfCars * Constants.COST_OF_CAR;
+
+		if (model.boardingOption == Constants.COST_OF_SINGLE_SIDED) {
+			cost += model.numberOfCars * Constants.COST_OF_SINGLE_SIDED;
+		} else if (model.boardingOption == Constants.DOUBLE_SIDED) {
+			cost += model.numberOfCars * Constants.COST_OF_DOUBLE_SIDED;
+		}
+		return cost;
+	}
+	
+	protected int getMaxNumberOfCustomers(Trains train) {
+		return train.numCars * Constants.MAX_CUSTOMERS_PER_CAR;
+	}
+
+	protected int getAvailableCapacity(Trains train) {
+		return getMaxNumberOfCustomers(train) - train.getN();
 	}
 }

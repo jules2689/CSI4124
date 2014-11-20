@@ -20,24 +20,6 @@ public class Trains {
 		numLeavingCustomers = new int[numStations];
 	}
 
-	public int getCustomerLeaving(int id) {
-		return numLeavingCustomers[id];
-	}
-	
-	public void setCustomerLeaving(int id, int value){
-		numLeavingCustomers[id] = value;
-	}
-
-	// Required methods to manipulate the group
-	protected void insertGrp(int id, int customers) {
-		numCustomers[id] += customers;
-	}
-
-	protected boolean removeGrp(int id, int customers) {
-		numCustomers[id] -= customers;
-		return (true);
-	}
-
 	protected int getN() {
 		int sum = 0;
 		for (int i = 0; i< this.numCustomers.length; i++) {
@@ -46,11 +28,5 @@ public class Trains {
 		return sum;
 	} // Attribute n
 
-	protected int getMaxNumberOfCustomers() {
-		return numCars * Constants.MAX_CUSTOMERS_PER_CAR;
-	}
-
-	protected int getAvailableCapacity() {
-		return getMaxNumberOfCustomers() - getN();
-	}
+	
 }

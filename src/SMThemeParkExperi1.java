@@ -10,7 +10,7 @@ class SMThemeParkExperi1 {
 	public static void main(String[] args) {
 		double startTime = 0.0, endTime = 750.0;
 		SMThemePark park; // Simulation object
-		int NUMRUNS = 30; // TODO needs modifying?
+		int NUMRUNS = 1; // TODO needs modifying?
 		int[] boardingOptions = new int[] { Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED, Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED }; // boarding options in
@@ -29,7 +29,7 @@ class SMThemeParkExperi1 {
 		}
 
 		// Number of Seeds
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < NUMRUNS; i++) {
 			Seeds seed = sds[i];
 			int runNumber = 1;
 			System.out
