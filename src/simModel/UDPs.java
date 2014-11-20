@@ -66,7 +66,7 @@ public class UDPs {
 			// train is not full, all customers boarding in the train
 			numCustomersBoarding = station.numCustomers;
 		}
-		train.numCustomers[id] += numCustomersBoarding;
+		train.numCustomers += numCustomersBoarding;
 		station.removeGrp(numCustomersBoarding);
 
 		// update customer leaving at next station

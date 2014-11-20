@@ -30,7 +30,7 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 		// RQ.Tracks[ID].Trains[0].numCustomers
 		// RQ.Tracks[ID].Trains[0].numCustomers -
 		// RQ.Tracks[ID].Trains[0].leavingCustomers
-		train.numCustomers[id] -= train.numLeavingCustomers[id];
+		train.numCustomers -= train.numLeavingCustomers[id];
 		//as discussed in class, boarding is to take place at the end of extra boarding time
 	}
 
