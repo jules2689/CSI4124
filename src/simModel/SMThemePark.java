@@ -159,7 +159,7 @@ public class SMThemePark extends AOSimulationModel {
 					for (int j = 0; j < this.rqTracks[i].getN(); j++) {
 						Trains t = rqTracks[i].trainList.get(j);
 						System.out.println("Train " + j + " numCustomers="
-								+ t.getN() + " status=" + t.status
+								+ t.numCustomers + " status=" + t.status
 								+ " numLeavingCustomers="
 								+ t.numLeavingCustomers[i]);
 					}

@@ -24,7 +24,7 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 			flagValue = 2;
 		} else if (model.rqTracks[id].getN() > 0) {
 			Trains train = model.rqTracks[id].trainList.get(0);
-			if (train.getN() == model.udp.getMaxNumberOfCustomers(train)) {
+			if (train.numCustomers == model.udp.getMaxNumberOfCustomers(train)) {
 				flagValue = 3;
 			}
 		}

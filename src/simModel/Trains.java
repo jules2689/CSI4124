@@ -19,9 +19,5 @@ public class Trains {
 		numLeavingCustomers = new int[numStations];
 	}
 
-	protected int getN() {
-		return numCustomers;
-	} // Attribute n
-
 	
 }

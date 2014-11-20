@@ -103,6 +103,6 @@ public class UDPs {
 	}
 
 	protected int getAvailableCapacity(Trains train) {
-		return getMaxNumberOfCustomers(train) - train.getN();
+		return getMaxNumberOfCustomers(train) - train.numCustomers;
 	}
 }
