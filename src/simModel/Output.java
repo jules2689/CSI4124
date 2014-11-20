@@ -10,7 +10,7 @@ class Output {
 	}
 
 	// SSOVs
-	private int totalEvent = 0;// TODO modify document
+	private int totalNumberOfEvents = 0;
 	private int type1BoardingEvent = 0;
 	private int type2BoardingEvent = 0;
 	private int type3BoardingEvent = 0;
@@ -23,7 +23,7 @@ class Output {
 	private double perctOfType4Scen;
 
 	public int getTotalEvent() {
-		return totalEvent;
+		return totalNumberOfEvents;
 	}
 
 	public int getType1BoardingEvent() {
@@ -43,27 +43,27 @@ class Output {
 	}
 
 	public double getPerctOfType1Scen() {
-		this.perctOfType1Scen = 100 * this.type1BoardingEvent / (double)this.totalEvent;
+		this.perctOfType1Scen = 100 * this.type1BoardingEvent / (double)this.totalNumberOfEvents;
 		return this.perctOfType1Scen;
 	}
 
 	public double getPerctOfType2Scen() {
-		this.perctOfType2Scen = 100 * this.type2BoardingEvent / (double)this.totalEvent;
+		this.perctOfType2Scen = 100 * this.type2BoardingEvent / (double)this.totalNumberOfEvents;
 		return this.perctOfType2Scen;
 	}
 
 	public double getPerctOfType3Scen() {
-		this.perctOfType3Scen = 100 * this.type3BoardingEvent / (double)this.totalEvent;
+		this.perctOfType3Scen = 100 * this.type3BoardingEvent / (double)this.totalNumberOfEvents;
 		return this.perctOfType3Scen;
 	}
 
 	public double getPerctOfType4Scen() {
-		this.perctOfType4Scen = 100 * this.type4BoardingEvent / (double)this.totalEvent;
+		this.perctOfType4Scen = 100 * this.type4BoardingEvent / (double)this.totalNumberOfEvents;
 		return this.perctOfType4Scen;
 	}
 
 	public void setTotalEvent(int totalEvent) {
-		this.totalEvent = totalEvent;
+		this.totalNumberOfEvents = totalEvent;
 	}
 
 	public void setType1BoardingEvent(int type1BoardingEvent) {
@@ -83,7 +83,7 @@ class Output {
 	}
 	
 	public void incrTotalEvent() {
-		totalEvent++;
+		totalNumberOfEvents++;
 	}
 	
 	public void incrType1BoardingEvent() {
