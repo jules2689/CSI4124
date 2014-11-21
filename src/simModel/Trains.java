@@ -6,18 +6,14 @@ public class Trains {
 		BOARDING, TRAVELLING, ARRIVED
 	};
 
-	protected int numCars; // an integer value between 1 and 9 which represents
-							// the number of car
-
+	protected int numCars; // an integer value between 1 and 9 which represents the number of car
 	protected int numCustomers; // id matches station
 	protected int[] numLeavingCustomers; // id matches station
-
-	StatusType status;//
+	StatusType status;
 
 	public Trains(int numCars, int numStations) {
 		this.numCars = numCars; // default length of train
 		numLeavingCustomers = new int[numStations];
 	}
 
-	
 }

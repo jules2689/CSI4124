@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Tracks {
 
-	// protected int trackSegID;
-	// protected int travelTime;
-
 	protected ArrayList<Trains> trainList = new ArrayList<Trains>();
 
 	// Required methods to manipulate the queue

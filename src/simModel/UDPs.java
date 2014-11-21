@@ -8,8 +8,7 @@ public class UDPs {
 		this.model = model;
 	}
 
-	// Translate User Defined Procedures into methods
-
+	// Check if a station has an "Arrived" train
 	public boolean checkTrainArrived(int id) {
 		Tracks track = model.rqTracks[id];
 		// at least two trains are on the track
@@ -36,6 +35,7 @@ public class UDPs {
 		return Constants.NO_STATION;
 	}
 
+	//Process Output for Station
 	protected void setOutputForStation(Stations stn) {
 		if (stn.numCustomers == 0) {
 			model.output.incrType1BoardingEvent();
@@ -49,6 +49,7 @@ public class UDPs {
 		model.output.incrTotalEvent();
 	}
 
+	//Process customers from Station to Train
 	protected void boardAtStation(int id) {
 		Trains train = model.rqTracks[id].trainList.get(0);
 		Stations station = model.gStations[id];
@@ -59,7 +60,6 @@ public class UDPs {
 		// boarding:
 
 		if (station.numCustomers >= capacityAvailableForTrain) {
-
 			// train is full, some customer cannot boarding
 			numCustomersBoarding = capacityAvailableForTrain;
 		} else {
@@ -75,8 +75,7 @@ public class UDPs {
 		// Constants.PERCENTAGE_OF_UNBOARDING[ID+1]
 
 		for (int i = 0; i < model.gStations.length; i++) {
-			int numLeaving = (int) (numCustomersBoarding * model.dvp
-					.getPercentageOfCustomersLeaving(id, i));
+			int numLeaving = (int) (numCustomersBoarding * model.dvp.getPercentageOfCustomersLeaving(id, i));
 			if (i == id) {
 				train.numLeavingCustomers[i] = 0;
 			} else {
@@ -85,6 +84,7 @@ public class UDPs {
 		}
 	}
 	
+	//Calculate the cost of the current model
 	public int getCost(){
 		int cost = 0;
 		cost += model.numberOfTrains * Constants.COST_OF_TRAIN;

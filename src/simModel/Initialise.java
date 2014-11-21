@@ -5,13 +5,12 @@ import absmodJ.ScheduledAction;
 class Initialise extends ScheduledAction {
 	SMThemePark model;
 
-	// Constructor
+	double[] ts = { 0.0, -1.0 }; // -1.0 ends scheduling
+	int tsix = 0; // set index to first entry.
+	
 	public Initialise(SMThemePark model) {
 		this.model = model;
 	}
-
-	double[] ts = { 0.0, -1.0 }; // -1.0 ends scheduling
-	int tsix = 0; // set index to first entry.
 
 	@Override
 	public double timeSequence() {
@@ -43,7 +42,7 @@ class Initialise extends ScheduledAction {
 			//Initialize trains in the station. 
 			//Suppose that before the park is open, the trains is already put in different stations 
 			//in order to service customer more efficiently
-			int stationID = i % model.rqTracks.length; //0 - 3
+			int stationID = i % model.rqTracks.length; // from 0 - 3
 			model.rqTracks[stationID].spInsertQue(train);
 		}
 	}

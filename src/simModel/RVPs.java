@@ -11,14 +11,10 @@ class RVPs {
 	// constructor with seeds
 
 	/* Data Models for implementing timing maps */
-	protected Exponential interArrDistFP; // Exponential distribution for
-											// interarrival times in FP
-	protected Exponential interArrDistSH; // Exponential distribution for
-											// interarrival times in SH
-	protected Exponential interArrDistGI; // Exponential distribution for
-											// interarrival times in GI
-	protected Exponential interArrDistRC; // Exponential distribution for
-											// interarrival times in RC
+	protected Exponential interArrDistFP; // Exponential distribution for interarrival times in FP
+	protected Exponential interArrDistSH; // Exponential distribution for interarrival times in SH
+	protected Exponential interArrDistGI; // Exponential distribution for interarrival times in GI
+	protected Exponential interArrDistRC; // Exponential distribution for interarrival times in RC
 
 	final static double MEAN_ARRL_FP_1 = 0.13;
 	final static double MEAN_ARRL_FP_2 = 0.20;

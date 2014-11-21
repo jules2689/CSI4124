@@ -3,12 +3,10 @@ package simModel;
 class DVPs {
 	SMThemePark model; // for accessing the clock
 
-	// Constructor
 	public DVPs(SMThemePark model) {
 		this.model = model;
 	}
 
-	// boardingOption
 	protected double uLoadUnloadTime() {
 		if (model.boardingOption == Constants.DOUBLE_SIDED) {
 			return 1.25; // double sided

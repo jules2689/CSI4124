@@ -38,8 +38,7 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 		model.udp.boardAtStation(id);
 		// set output
 		model.udp.setOutputForStation(model.gStations[id]);
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(
-				this.model, this.id);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.model, this.id);
 		model.spStart(travelAct);
 	}
 
@@ -60,10 +59,8 @@ public class ExtraBoardingTime extends ExtSequelActivity {
 		// set output
 		model.udp.setOutputForStation(model.gStations[id]);
 		// SP.Start(TravellingBetweenStations)
-		TravellingBetweenStations travelAct = new TravellingBetweenStations(
-				this.model, this.id);
+		TravellingBetweenStations travelAct = new TravellingBetweenStations(this.model, this.id);
 		model.spStart(travelAct);
-
 	}
 
 }

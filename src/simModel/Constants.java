@@ -16,6 +16,8 @@ public class Constants {
 	protected final static String RC_S = "Raccoon Corner"; // Raccoon Corner
 
 	protected final static int MAX_CUSTOMERS_PER_CAR = 25; // the maximum number of customers per car
+	
+	// These are public so that they are accessible inside the SMThemeParkExperi1.java file
 	public final static int MIN_NUMBER_OF_TRAINS = 4; // the minimum number of trains in the system
 	public final static int MAX_NUMBER_OF_TRAINS = 8; // the maximum number of trains in the system
 	public final static int MIN_NUMBER_OF_CARS = 4; // the minimum number of cars in the system; experiment starts with min 4

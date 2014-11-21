@@ -11,7 +11,6 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 	}
 
 	protected static boolean precondition(SMThemePark model) {
-		// return none or an id
 		return model.udp.stationReadyForUnboarding() != Constants.NO_STATION;
 	}
 
@@ -36,8 +35,7 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 
 	@Override
 	protected void terminatingEvent() {
-		ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(this.model,
-				id);
+		ExtraBoardingTime extraBoardingTime = new ExtraBoardingTime(this.model, id);
 		model.spStart(extraBoardingTime);
 	}
 
