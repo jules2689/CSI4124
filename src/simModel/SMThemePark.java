@@ -68,7 +68,7 @@ public class SMThemePark extends AOSimulationModel {
 			this.rqTracks[i] = new Tracks();
 		}
 
-		closingTime = tftime; // record the closing time
+		closingTime = tftime - 30; // record the closing time. the closing time is 30 minutes before the end of the simulation.
 		// Initialize the simulation model
 		initAOSimulModel(t0time, tftime);
 
