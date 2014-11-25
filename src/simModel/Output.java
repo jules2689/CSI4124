@@ -1,6 +1,6 @@
 package simModel;
 
-class Output {
+public class Output {
 
 	SMThemePark model;
 
