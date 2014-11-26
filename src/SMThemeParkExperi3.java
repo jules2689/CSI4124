@@ -1,19 +1,21 @@
 // File: Experiment.java
 // Description:
 
+import java.util.Arrays;
+
 import absmodJ.ConfidenceInterval;
 import simModel.*;
 import cern.jet.random.engine.*;
 
 // Main Method: Experiments
 // 
-class SMThemeParkExperi2 {
-	public static final double CONF_LEVEL = 0.968; //TODO
+class SMThemeParkExperi3 {
+	public static double [] cfLevels = { 0.90, 0.99, 0.94 }; //TODO
 	
 	public static void main(String[] args) {
 		double startTime = 0.0, endTime = 750.0;
 		SMThemePark park; // Simulation object
-		int NUMRUNS = 30; // TODO needs modifying?
+		int NUMRUNS = 65; // TODO needs modifying?
 		int[] boardingOptions = new int[] { Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED, Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED }; // boarding options in
@@ -31,6 +33,8 @@ class SMThemeParkExperi2 {
 			sds[i] = new Seeds(rsg);
 		}
 		// The other are Ck's and one more must be calculated to ensure the overall CF
+
+		double [] confLevels = computeLastCFLevel(cfLevels);
 		
 	    double [] valuesCase1ForType1 = new double[NUMRUNS];
 	    double [] valuesCase1ForType2 = new double[NUMRUNS];
@@ -209,20 +213,20 @@ class SMThemeParkExperi2 {
 		}
 		
 		 // Get the conficence intervals
-	       ConfidenceInterval cfDiff21ForType1 = new ConfidenceInterval(valuesDiff21ForType1, CONF_LEVEL);
-	       ConfidenceInterval cfDiff21ForType2 = new ConfidenceInterval(valuesDiff21ForType2, CONF_LEVEL);
-	       ConfidenceInterval cfDiff21ForType3 = new ConfidenceInterval(valuesDiff21ForType3, CONF_LEVEL);
-	       ConfidenceInterval cfDiff21ForType4 = new ConfidenceInterval(valuesDiff21ForType4, CONF_LEVEL);
+	       ConfidenceInterval cfDiff21ForType1 = new ConfidenceInterval(valuesDiff21ForType1, confLevels[1]);
+	       ConfidenceInterval cfDiff21ForType2 = new ConfidenceInterval(valuesDiff21ForType2, confLevels[1]);
+	       ConfidenceInterval cfDiff21ForType3 = new ConfidenceInterval(valuesDiff21ForType3, confLevels[1]);
+	       ConfidenceInterval cfDiff21ForType4 = new ConfidenceInterval(valuesDiff21ForType4, confLevels[1]);
 	       
-	       ConfidenceInterval cfDiff31ForType1 = new ConfidenceInterval(valuesDiff31ForType1, CONF_LEVEL);
-	       ConfidenceInterval cfDiff31ForType2 = new ConfidenceInterval(valuesDiff31ForType2, CONF_LEVEL);
-	       ConfidenceInterval cfDiff31ForType3 = new ConfidenceInterval(valuesDiff31ForType3, CONF_LEVEL);
-	       ConfidenceInterval cfDiff31ForType4 = new ConfidenceInterval(valuesDiff31ForType4, CONF_LEVEL);	       
+	       ConfidenceInterval cfDiff31ForType1 = new ConfidenceInterval(valuesDiff31ForType1, confLevels[2]);
+	       ConfidenceInterval cfDiff31ForType2 = new ConfidenceInterval(valuesDiff31ForType2, confLevels[2]);
+	       ConfidenceInterval cfDiff31ForType3 = new ConfidenceInterval(valuesDiff31ForType3, confLevels[2]);
+	       ConfidenceInterval cfDiff31ForType4 = new ConfidenceInterval(valuesDiff31ForType4, confLevels[2]);	       
 	       
-	       ConfidenceInterval cfDiff41ForType1 = new ConfidenceInterval(valuesDiff41ForType1, CONF_LEVEL);
-	       ConfidenceInterval cfDiff41ForType2 = new ConfidenceInterval(valuesDiff41ForType2, CONF_LEVEL);
-	       ConfidenceInterval cfDiff41ForType3 = new ConfidenceInterval(valuesDiff41ForType3, CONF_LEVEL);
-	       ConfidenceInterval cfDiff41ForType4 = new ConfidenceInterval(valuesDiff41ForType4, CONF_LEVEL);
+	       ConfidenceInterval cfDiff41ForType1 = new ConfidenceInterval(valuesDiff41ForType1, confLevels[3]);
+	       ConfidenceInterval cfDiff41ForType2 = new ConfidenceInterval(valuesDiff41ForType2, confLevels[3]);
+	       ConfidenceInterval cfDiff41ForType3 = new ConfidenceInterval(valuesDiff41ForType3, confLevels[3]);
+	       ConfidenceInterval cfDiff41ForType4 = new ConfidenceInterval(valuesDiff41ForType4, confLevels[3]);
 	       
 	       // Create the table
 	       System.out.printf("-------------------------------------------------------------------------------------------\n");
@@ -286,4 +290,38 @@ class SMThemeParkExperi2 {
 	       System.out.printf("-------------------------------------------------------------------------------------------\n");
 
 	}
+	   /*
+	    * The last level must satisfy the following equation
+	    *     C = (1-K) + sum_k_1_K(Ck)     (sum_k_1_K is sum over terms for k = 1 to K)
+	    *     where C = levels[0], 
+	    *           Ck are the values of levels[i] for i = 1 to levels.length-1
+	    *           K = levels.length  (note that we add one element, i.e. K = newLevels.length-1)
+	    *     Can use alternative:  C = 1 - sum_k_1_K(alpha_k)  where alpha_k = 1 - Ck
+	    *     Thus C = 1 - sum_k_1_K-1(alpha_k) - alpha_K, and thus
+	    *          alpha_K = 1 - C - sum_k_1_K-1(alpha_k)   (note that alpha_k for k = 1 to K-1 are known)
+	    *          and CK = 1 - alpha_K
+	    */
+	   public static double [] computeLastCFLevel(double [] levels)
+	   {
+		   double [] newLevels = new double[levels.length+1];
+		   double alphaK = 1.0 - levels[0];   // Assign C - 1 to alpha K
+		   newLevels[0] = levels[0];  // Save C in new array
+		   // Sum 1 - Ck to alphaK for k = 1 to K - 1
+		   // At the sam time save values in new array
+		   for(int k = 1 ; k<levels.length; k++)
+		   {
+			   alphaK = alphaK - (1 - levels[k]);
+			   newLevels[k] = levels[k];
+		   }
+		   newLevels[newLevels.length - 1] = 1.0 - alphaK;
+		   // Double check the values
+		   double sum = 0.0;
+		   for(int k = 1 ; k < newLevels.length ; k++) sum = sum +(1 - newLevels[k]);
+		   if(Math.abs(newLevels[0] - (1.0 - sum)) > 0.001) 
+		   {
+			   System.out.println("Last value invalid in Confidence Levels: "+Arrays.toString(newLevels));
+			   newLevels = null;  // return null value to flag error.
+		   }
+		   return(newLevels);		   
+	   }
 }
