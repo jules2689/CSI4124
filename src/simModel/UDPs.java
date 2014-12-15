@@ -67,7 +67,7 @@ public class UDPs {
 			numCustomersBoarding = station.numCustomers;
 		}
 		train.numCustomers += numCustomersBoarding;
-		station.removeGrp(numCustomersBoarding);
+		station.numCustomers -= numCustomersBoarding;
 
 		// update customer leaving at next station
 		// RQ.Tracks[ID].Trains[0].leavingCustomers

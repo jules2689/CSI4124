@@ -17,7 +17,7 @@ public class ArriveAtStationGI extends ScheduledAction {
 
 	@Override
 	protected void actionEvent() {
-		model.gStations[Constants.GI].insertGrp(1);
+		model.gStations[Constants.GI].numCustomers += 1;
 	}
 
 }
