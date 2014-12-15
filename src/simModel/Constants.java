@@ -10,6 +10,8 @@ public class Constants {
 	protected final static int RC = 3; // Raccoon Corner
 	protected final static int NO_STATION = -1; //no station
 	
+	public final static int NUM_STATIONS = 4;
+	
 	protected final static String FP_S = "Frog Pond"; // Frog Pond
 	protected final static String SH_S = "Skunk Hollow"; // Skunk Hollow
 	protected final static String GI_S = "Gator Island"; // Gator Island
@@ -30,6 +32,4 @@ public class Constants {
 	
 	public final static int SINGLE_SIDED = 0; //single sided boarding for cars
 	public final static int DOUBLE_SIDED = 1; //double sided boarding for cars
-	
-	
 }

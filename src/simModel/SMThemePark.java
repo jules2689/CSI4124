@@ -60,7 +60,7 @@ public class SMThemePark extends AOSimulationModel {
 
 		// Initial four station
 		String[] names = new String[] { Constants.FP_S, Constants.SH_S, Constants.GI_S, Constants.RC_S };
-		for (int i = 0; i < this.gStations.length; i++) {
+		for (int i = 0; i < Constants.NUM_STATIONS; i++) {
 			this.gStations[i] = new Stations(names[i]);
 		}
 		// Initial tracks
@@ -143,7 +143,7 @@ public class SMThemePark extends AOSimulationModel {
 			// arrivals
 			if (!ScheduledAction.class.isInstance(this.sbl.peek().behaviourInstance)) {
 				System.out.println("Clock: " + getClock() + ": ");
-				for (int i = 0; i < this.gStations.length; i++) {
+				for (int i = 0; i < Constants.NUM_STATIONS; i++) {
 					System.out.println(gStations[i].name + " numCustomers=" + gStations[i].numCustomers);
 					System.out.println(gStations[i].name + "'s Track size=" + this.rqTracks[i].getN());
 					// look at the trains on the track for the station

@@ -35,7 +35,7 @@ class Initialise extends ScheduledAction {
 			}
 			//RCG.Trains[ID].status ← ARRIVED (Done in the construction method)
 			//RCG.Trains[ID].numCars ← numCars (Done in the construction method)
-			Trains train = new Trains(numCars,model.gStations.length);
+			Trains train = new Trains(numCars, Constants.NUM_STATIONS);
 			train.status = Trains.StatusType.ARRIVED;
 			model.rcgTrains[i] = train;
 			

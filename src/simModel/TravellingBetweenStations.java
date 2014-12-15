@@ -15,7 +15,7 @@ public class TravellingBetweenStations extends SequelActivity {
 
 	@Override
 	protected double duration() {
-		return model.dvp.travelTime((this.id + 1) % model.gStations.length);
+		return model.dvp.travelTime((this.id + 1) % Constants.NUM_STATIONS);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class TravellingBetweenStations extends SequelActivity {
 		// RQ.Tracks[ID].Trains[0] = TRAVELLING
 		train.status = Trains.StatusType.TRAVELLING;
 		// SP.insertQue(RQ.Tracks[ID+1], RQ.Tracks[ID].Trains[0])
-		int nextId = (this.id + 1) % model.gStations.length; // 0-3
+		int nextId = (this.id + 1) % Constants.NUM_STATIONS; // 0-3
 		// SP.RemoveQue(RQ.Tracks[ID].Trains[0])
 		model.rqTracks[this.id].spRemoveQue();
 		model.rqTracks[nextId].spInsertQue(train);

@@ -74,7 +74,7 @@ public class UDPs {
 		// RQ.Tracks[ID].Trains[0].numCustomers *
 		// Constants.PERCENTAGE_OF_UNBOARDING[ID+1]
 
-		for (int i = 0; i < model.gStations.length; i++) {
+		for (int i = 0; i < Constants.NUM_STATIONS; i++) {
 			int numLeaving = (int) (numCustomersBoarding * model.dvp.getPercentageOfCustomersLeaving(id, i));
 			if (i == id) {
 				train.numLeavingCustomers[i] = 0;
