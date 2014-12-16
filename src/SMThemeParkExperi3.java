@@ -74,12 +74,9 @@ class SMThemeParkExperi3 {
 		for (int i = 0; i < NUMRUNS; i++) {
 			Seeds seed = sds[i];
 			int runNumber = 1;
-			System.out
-					.println("\n\n======================================================");
-			System.out.println("=======================SEED #" + i
-					+ "========================");
-			System.out
-					.println("======================================================");
+			System.out .println("\n\n======================================================");
+			System.out.println("=======================SEED #" + i + "========================");
+			System.out.println("======================================================");
 
 			// For Each Case Scenario Within Cars Within Trains
 			
@@ -88,19 +85,13 @@ class SMThemeParkExperi3 {
 			// For Each Train Scenario Within Seeds
 			traincarloop: for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
 				// For Each Car Scenario Within Train
-				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS
-						* numTrains; numCars++) {
-					park = new SMThemePark(startTime, endTime, numTrains,
-							numCars, boardingOptions[0],
-							fixBoardingTime[0], seed, false);
+				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS * numTrains; numCars++) {
+					park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[0], fixBoardingTime[0], seed, false);
 					park.runSimulation();
 					runNumber++;
 					if (park.projectGoalReached()) {
-						System.out.println("==========Case 1" 
-								+ ", Seed " + i + ", Run Number " + runNumber
-								+ "==========");
-						System.out.println("Number of Cars: " + numCars
-								+ " Number of Trains: " + numTrains);
+						System.out.println("==========Case 1" + ", Seed " + i + ", Run Number " + runNumber + "==========");
+						System.out.println("Number of Cars: " + numCars + " Number of Trains: " + numTrains);
 						park.outputResults();
 						valuesCase1ForType1[i] = park.output.getPerctOfType1Scen();
 						valuesCase1ForType2[i] = park.output.getPerctOfType2Scen();
@@ -116,19 +107,13 @@ class SMThemeParkExperi3 {
 			// For Each Train Scenario Within Seeds
 			traincarloop: for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
 				// For Each Car Scenario Within Train
-				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS
-						* numTrains; numCars++) {
-					park = new SMThemePark(startTime, endTime, numTrains,
-							numCars, boardingOptions[1],
-							fixBoardingTime[1], seed, false);
+				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS * numTrains; numCars++) {
+					park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[1], fixBoardingTime[1], seed, false);
 					park.runSimulation();
 					runNumber++;
 					if (park.projectGoalReached()) {
-						System.out.println("==========Case 2" 
-								+ ", Seed " + i + ", Run Number " + runNumber
-								+ "==========");
-						System.out.println("Number of Cars: " + numCars
-								+ " Number of Trains: " + numTrains);
+						System.out.println("==========Case 2" + ", Seed " + i + ", Run Number " + runNumber + "==========");
+						System.out.println("Number of Cars: " + numCars + " Number of Trains: " + numTrains);
 						park.outputResults();
 						valuesCase2ForType1[i] = park.output.getPerctOfType1Scen();
 						valuesCase2ForType2[i] = park.output.getPerctOfType2Scen();
@@ -150,19 +135,13 @@ class SMThemeParkExperi3 {
 			// For Each Train Scenario Within Seeds
 			traincarloop: for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
 				// For Each Car Scenario Within Train
-				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS
-						* numTrains; numCars++) {
-					park = new SMThemePark(startTime, endTime, numTrains,
-							numCars, boardingOptions[2],
-							fixBoardingTime[2], seed, false);
+				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS * numTrains; numCars++) {
+					park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[2], fixBoardingTime[2], seed, false);
 					park.runSimulation();
 					runNumber++;
 					if (park.projectGoalReached()) {
-						System.out.println("==========Case 3" 
-								+ ", Seed " + i + ", Run Number " + runNumber
-								+ "==========");
-						System.out.println("Number of Cars: " + numCars
-								+ " Number of Trains: " + numTrains);
+						System.out.println("==========Case 3" + ", Seed " + i + ", Run Number " + runNumber + "==========");
+						System.out.println("Number of Cars: " + numCars + " Number of Trains: " + numTrains);
 						park.outputResults();
 						valuesCase3ForType1[i] = park.output.getPerctOfType1Scen();
 						valuesCase3ForType2[i] = park.output.getPerctOfType2Scen();
@@ -183,19 +162,13 @@ class SMThemeParkExperi3 {
 			// For Each Train Scenario Within Seeds
 			traincarloop: for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
 				// For Each Car Scenario Within Train
-				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS
-						* numTrains; numCars++) {
-					park = new SMThemePark(startTime, endTime, numTrains,
-							numCars, boardingOptions[3],
-							fixBoardingTime[3], seed, false);
+				for (int numCars = Constants.MIN_NUMBER_OF_CARS * numTrains; numCars <= Constants.MAX_NUMBER_OF_CARS * numTrains; numCars++) {
+					park = new SMThemePark(startTime, endTime, numTrains, numCars, boardingOptions[3], fixBoardingTime[3], seed, false);
 					park.runSimulation();
 					runNumber++;
 					if (park.projectGoalReached()) {
-						System.out.println("==========Case 4" 
-								+ ", Seed " + i + ", Run Number " + runNumber
-								+ "==========");
-						System.out.println("Number of Cars: " + numCars
-								+ " Number of Trains: " + numTrains);
+						System.out.println("==========Case 4" + ", Seed " + i + ", Run Number " + runNumber + "==========");
+						System.out.println("Number of Cars: " + numCars + " Number of Trains: " + numTrains);
 						park.outputResults();
 						valuesCase4ForType1[i] = park.output.getPerctOfType1Scen();
 						valuesCase4ForType2[i] = park.output.getPerctOfType2Scen();
