@@ -8,10 +8,11 @@ public class TableHelper {
     
     // Create the table
     System.out.println(breakLine);
-    System.out.printf("                          cfDiff21ForType1 || cfDiff31ForType1 || cfDiff31ForType1 ||");
-    System.out.printf(" cfDiff21ForType2 || cfDiff31ForType2 || cfDiff31ForType2 ||");
-    System.out.printf(" cfDiff21ForType3 || cfDiff31ForType3 || cfDiff31ForType3 ||");
-    System.out.printf(" cfDiff21ForType4 || cfDiff31ForType4 || cfDiff31ForType4\n");
+    System.out.printf("                         "); // First column for run numbers
+    System.out.printf(" cfDiff21ForType1 || cfDiff31ForType1 || cfDiff41ForType1 ||");
+    System.out.printf(" cfDiff21ForType2 || cfDiff31ForType2 || cfDiff41ForType2 ||");
+    System.out.printf(" cfDiff21ForType3 || cfDiff31ForType3 || cfDiff41ForType3 ||");
+    System.out.printf(" cfDiff21ForType4 || cfDiff31ForType4 || cfDiff41ForType4\n");
     System.out.printf(breakLine);
     
     printTableRows(new ConfidenceInterval[]{cfDiff21ForType1, cfDiff31ForType1, cfDiff41ForType1, cfDiff21ForType2, cfDiff31ForType2, cfDiff41ForType2, cfDiff21ForType3, cfDiff31ForType3, cfDiff41ForType3, cfDiff21ForType4, cfDiff31ForType4, cfDiff41ForType4});
