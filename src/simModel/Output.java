@@ -102,4 +102,8 @@ public class Output {
 		this.type4BoardingEvent++;
 	}
 
+	public double getCost() {
+		return model.udp.getCost();
+	}
+
 }
