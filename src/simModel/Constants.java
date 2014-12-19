@@ -25,10 +25,10 @@ public class Constants {
 	public final static int MIN_NUMBER_OF_CARS = 4; // the minimum number of cars in the system; experiment starts with min 4
 	public final static int MAX_NUMBER_OF_CARS = 9; // the maximum number of cars in the system
 
-	protected final static int COST_OF_TRAIN = 300;
-	protected final static int COST_OF_CAR = 500;
-	protected final static int COST_OF_SINGLE_SIDED = 0;
-	protected final static int COST_OF_DOUBLE_SIDED = 20;
+	public final static int COST_OF_TRAIN = 300;
+	public final static int COST_OF_CAR = 500;
+	public final static int COST_OF_SINGLE_SIDED = 0;
+	public final static int COST_OF_DOUBLE_SIDED = 20;
 	
 	public final static int SINGLE_SIDED = 0; //single sided boarding for cars
 	public final static int DOUBLE_SIDED = 1; //double sided boarding for cars

@@ -12,12 +12,12 @@ import cern.jet.random.engine.*;
 class SMThemeParkExperi3 {
 	   // Confidence levels - first one is the overall confidence level. 
 	   // The other are Ck's and one more must be calculated to ensure the overall CF
-	public static double[] cfLevels = { 0.90, 0.99, 0.94 }; // TODO
+	public static double[] cfLevels = { 0.80, 0.99, 0.85 }; // TODO
 
 	public static void main(String[] args) {
 		double startTime = 0.0, endTime = 750.0;
 		SMThemePark park; // Simulation object
-		int NUMRUNS = 10000; // TODO needs modifying?
+		int NUMRUNS = 5000; // TODO needs modifying?
 		int[] boardingOptions = new int[] { Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED, Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED }; // boarding options in
@@ -190,6 +190,21 @@ class SMThemeParkExperi3 {
 				cfDiff41ForCosts, cfDiff21ForTrains, cfDiff31ForTrains,
 				cfDiff41ForTrains, cfDiff21ForCars, cfDiff31ForCars,
 				cfDiff41ForCars);
+		
+		System.out.println("\nCase Results: \n");
+		for (int i = 0; i < 4; i++){
+			ConfidenceInterval carsInterval = new ConfidenceInterval(
+					valuesCasesForCars[i], confLevels[i]),
+					trainsInterval = new ConfidenceInterval(
+							valuesCasesForTrains[i], confLevels[i]),
+							costsInterval = new ConfidenceInterval(
+									valuesCasesForCosts[i], confLevels[i]);
+			int cars = (int) carsInterval.getPointEstimate();
+			int trains = (int)trainsInterval.getPointEstimate();
+			int costs = (int) costsInterval.getPointEstimate();
+			System.out.println("Case " + (i+1) + " - Trains: "+ trains + " Cars: "+ cars + " - Cost: " + costs);
+		}
+		
 	}
 
 	/*
