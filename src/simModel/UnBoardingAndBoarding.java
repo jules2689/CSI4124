@@ -22,13 +22,9 @@ public class UnBoardingAndBoarding extends ConditionalActivity {
 	@Override
 	public void startingEvent() {
 		id = model.udp.stationReadyForUnboarding();
-		Trains train = model.rqTracks[id].trainList.get(0);
-		// RQ.Tracks[ID].Trains[0] = BOARDING
+		Trains train = model.rcgTrains[model.rqTracks[id].trainList.get(0)];
 		train.status = Trains.StatusType.BOARDING;
 		// unboarding:
-		// RQ.Tracks[ID].Trains[0].numCustomers
-		// RQ.Tracks[ID].Trains[0].numCustomers -
-		// RQ.Tracks[ID].Trains[0].leavingCustomers
 		train.numCustomers -= train.numLeavingCustomers[id];
 		//as discussed in class, boarding is to take place at the end of extra boarding time
 	}

@@ -14,7 +14,7 @@ public class SMThemePark extends AOSimulationModel {
 	/* Parameter */
 	// Define the parameters
 	protected int numberOfTrains; // number of trains, from 4-8
-	protected int numberOfCars; // total number of cars
+	protected int totalNumberOfCars; // total number of cars
 	protected int boardingOption; // 0:single-sided; 1:double_sided
 	protected boolean fixBoardingTime; // true:fix boarding time
 
@@ -45,13 +45,15 @@ public class SMThemePark extends AOSimulationModel {
 	protected double closingTime;
 
 	// Constructor
-	public SMThemePark(double t0time, double tftime, int nTrains, int nCars, int boardingOption, boolean fixBoardingTime, Seeds sd, boolean traceFlag) {
+	public SMThemePark(double t0time, double tftime, int nTrains, int nCars,
+			int boardingOption, boolean fixBoardingTime, Seeds sd,
+			boolean traceFlag) {
 		// Turn trancing on if traceFlag is true
 		this.traceFlag = traceFlag;
 
 		// Initialize parameters here
 		this.numberOfTrains = nTrains;
-		this.numberOfCars = nCars;
+		this.totalNumberOfCars = nCars;
 		this.boardingOption = boardingOption;
 		this.fixBoardingTime = fixBoardingTime;
 
@@ -59,7 +61,8 @@ public class SMThemePark extends AOSimulationModel {
 		rvp = new RVPs(this, sd);
 
 		// Initial four station
-		String[] names = new String[] { Constants.FP_S, Constants.SH_S, Constants.GI_S, Constants.RC_S };
+		String[] names = new String[] { Constants.FP_S, Constants.SH_S,
+				Constants.GI_S, Constants.RC_S };
 		for (int i = 0; i < Constants.NUM_STATIONS; i++) {
 			this.gStations[i] = new Stations(names[i]);
 		}
@@ -68,7 +71,9 @@ public class SMThemePark extends AOSimulationModel {
 			this.rqTracks[i] = new Tracks();
 		}
 
-		closingTime = tftime - 30; // record the closing time. the closing time is 30 minutes before the end of the simulation.
+		closingTime = tftime - 30; // record the closing time. the closing time
+									// is 30 minutes before the end of the
+									// simulation.
 		// Initialize the simulation model
 		initAOSimulModel(t0time, tftime);
 
@@ -105,7 +110,8 @@ public class SMThemePark extends AOSimulationModel {
 
 		// test for unboarding and boarding
 		if (UnBoardingAndBoarding.precondition(this) == true) {
-			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate instance
+			UnBoardingAndBoarding act = new UnBoardingAndBoarding(this); // Generate
+																			// instance
 			act.startingEvent();
 			scheduleActivity(act);
 		}
@@ -141,24 +147,34 @@ public class SMThemePark extends AOSimulationModel {
 		if (traceFlag) {
 			// only print the trace when there isn't an arrival because too many
 			// arrivals
-			if (!ScheduledAction.class.isInstance(this.sbl.peek().behaviourInstance)) {
+			if (!ScheduledAction.class
+					.isInstance(this.sbl.peek().behaviourInstance)) {
 				System.out.println("Clock: " + getClock() + ": ");
 				for (int i = 0; i < Constants.NUM_STATIONS; i++) {
-					System.out.println(gStations[i].name + " numCustomers=" + gStations[i].numCustomers);
-					System.out.println(gStations[i].name + "'s Track size=" + this.rqTracks[i].getN());
+					System.out.println(gStations[i].name + " numCustomers="
+							+ gStations[i].numCustomers);
+					System.out.println(gStations[i].name + "'s Track size="
+							+ this.rqTracks[i].getN());
 					// look at the trains on the track for the station
 					for (int j = 0; j < this.rqTracks[i].getN(); j++) {
-						Trains t = rqTracks[i].trainList.get(j);
-						System.out.println("Train " + j + " numCustomers=" + t.numCustomers + " status=" + t.status + " numLeavingCustomers=" + t.numLeavingCustomers[i]);
+						Trains t = rcgTrains[rqTracks[i].trainList.get(j)];
+						System.out.println("Train " + j + " numCustomers="
+								+ t.numCustomers + " status=" + t.status
+								+ " numLeavingCustomers="
+								+ t.numLeavingCustomers[i]);
 					}
 					System.out.println();
 				}
 
 				// print number of events
-				System.out.println("Number of Type 1 Events: " + output.getType1BoardingEvent());
-				System.out.println("Number of Type 2 Events: " + output.getType2BoardingEvent());
-				System.out.println("Number of Type 3 Events: " + output.getType3BoardingEvent());
-				System.out.println("Number of Type 4 Events: " + output.getType4BoardingEvent() + "\n");
+				System.out.println("Number of Type 1 Events: "
+						+ output.getType1BoardingEvent());
+				System.out.println("Number of Type 2 Events: "
+						+ output.getType2BoardingEvent());
+				System.out.println("Number of Type 3 Events: "
+						+ output.getType3BoardingEvent());
+				System.out.println("Number of Type 4 Events: "
+						+ output.getType4BoardingEvent() + "\n");
 
 				this.showSBL();
 			}
@@ -179,18 +195,25 @@ public class SMThemePark extends AOSimulationModel {
 
 	public boolean projectGoalReached() {
 		boolean result = false;
-		if (this.output.getPerctOfType4Scen() == 0.0 && this.output.getPerctOfType3Scen() <= 5.0 && this.output.getPerctOfType2Scen() <= 10.0) {
+		if (this.output.getPerctOfType4Scen() == 0.0
+				&& this.output.getPerctOfType3Scen() <= 5.0
+				&& this.output.getPerctOfType2Scen() <= 10.0) {
 			result = true;
 		}
 		return result;
 	}
 
 	public void outputResults() {
-		System.out.println("Percentage of Type 1 Events: " + output.getPerctOfType1Scen());
-		System.out.println("Percentage of Type 2 Events: " + output.getPerctOfType2Scen());
-		System.out.println("Percentage of Type 3 Events: " + output.getPerctOfType3Scen());
-		System.out.println("Percentage of Type 4 Events: " + output.getPerctOfType4Scen());
+		System.out.println("Percentage of Type 1 Events: "
+				+ output.getPerctOfType1Scen());
+		System.out.println("Percentage of Type 2 Events: "
+				+ output.getPerctOfType2Scen());
+		System.out.println("Percentage of Type 3 Events: "
+				+ output.getPerctOfType3Scen());
+		System.out.println("Percentage of Type 4 Events: "
+				+ output.getPerctOfType4Scen());
 
-		System.out.println("Cost: " + udp.getCost());
+		System.out.println("Cost: " + output.getCost());
 	}
+
 }

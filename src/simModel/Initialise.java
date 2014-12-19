@@ -25,15 +25,14 @@ class Initialise extends ScheduledAction {
 		//Initialize an array for the purpose of this method
 		model.rcgTrains = new Trains[model.numberOfTrains];
 		
-		int numRemainderCars = model.numberOfCars%model.numberOfTrains;
+		int numRemainderCars = model.totalNumberOfCars%model.numberOfTrains;
 		
 		for (int i = 0; i < model.numberOfTrains; i++) {
-			int numCars = (int)(model.numberOfCars/model.numberOfTrains);
+			int numCars = (int)(model.totalNumberOfCars/model.numberOfTrains);
 			if (numRemainderCars > 0) {
 				numCars++;
 				numRemainderCars--;
 			}
-			//RCG.Trains[ID].status ← ARRIVED (Done in the construction method)
 			//RCG.Trains[ID].numCars ← numCars (Done in the construction method)
 			Trains train = new Trains(numCars, Constants.NUM_STATIONS);
 			train.status = Trains.StatusType.ARRIVED;
@@ -43,7 +42,7 @@ class Initialise extends ScheduledAction {
 			//Suppose that before the park is open, the trains is already put in different stations 
 			//in order to service customer more efficiently
 			int stationID = i % model.rqTracks.length; // from 0 - 3
-			model.rqTracks[stationID].spInsertQue(train);
+			model.rqTracks[stationID].spInsertQue(i);
 		}
 	}
 

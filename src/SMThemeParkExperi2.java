@@ -32,22 +32,20 @@ class SMThemeParkExperi2 {
 
 		// Train Config
 		double[][] valuesCasesForTrains = new double[4][NUMRUNS];
-		double[] valuesDiff21ForTrains = new double[NUMRUNS];
-		double[] valuesDiff31ForTrains = new double[NUMRUNS];
-		double[] valuesDiff41ForTrains = new double[NUMRUNS];
 
 		// Cars Config
 		double[][] valuesCasesForCars = new double[4][NUMRUNS];
-		double[] valuesDiff21ForCars = new double[NUMRUNS];
-		double[] valuesDiff31ForCars = new double[NUMRUNS];
-		double[] valuesDiff41ForCars = new double[NUMRUNS];
 
 		// Costs Config
 		double[][] valuesCasesForCosts = new double[4][NUMRUNS];
 		double[] valuesDiff21ForCosts = new double[NUMRUNS];
 		double[] valuesDiff31ForCosts = new double[NUMRUNS];
 		double[] valuesDiff41ForCosts = new double[NUMRUNS];
-
+		
+		System.out.println("Running "+ NUMRUNS +" seeds.");
+		System.out.println("Confidence Level: "+ CONF_LEVEL);
+		System.out.println("\nPlease note that a large number of seeds may take a few hours to run.");
+		
 		// Number of Seeds
 		for (int i = 0; i < NUMRUNS; i++) {
 			Seeds seed = sds[i];
@@ -89,10 +87,6 @@ class SMThemeParkExperi2 {
 
 						valuesDiff21ForCosts[i] = valuesCasesForCosts[1][i]
 								- valuesCasesForCosts[0][i];
-						valuesDiff21ForCars[i] = valuesCasesForCars[1][i]
-								- valuesCasesForCars[0][i];
-						valuesDiff21ForTrains[i] = valuesCasesForTrains[1][i]
-								- valuesCasesForTrains[0][i];
 						break traincarloop;
 					}
 				}
@@ -115,10 +109,6 @@ class SMThemeParkExperi2 {
 
 						valuesDiff31ForCosts[i] = valuesCasesForCosts[2][i]
 								- valuesCasesForCosts[0][i];
-						valuesDiff31ForCars[i] = valuesCasesForCars[2][i]
-								- valuesCasesForCars[0][i];
-						valuesDiff31ForTrains[i] = valuesCasesForTrains[2][i]
-								- valuesCasesForTrains[0][i];
 						break traincarloop;
 					}
 				}
@@ -141,10 +131,6 @@ class SMThemeParkExperi2 {
 
 						valuesDiff41ForCosts[i] = valuesCasesForCosts[3][i]
 								- valuesCasesForCosts[0][i];
-						valuesDiff41ForCars[i] = valuesCasesForCars[3][i]
-								- valuesCasesForCars[0][i];
-						valuesDiff41ForTrains[i] = valuesCasesForTrains[3][i]
-								- valuesCasesForTrains[0][i];
 						break traincarloop;
 					}
 				}
@@ -152,20 +138,6 @@ class SMThemeParkExperi2 {
 		}
 
 		// Get the confidence intervals
-
-		ConfidenceInterval cfDiff21ForCars = new ConfidenceInterval(
-				valuesDiff21ForCars, CONF_LEVEL);
-		ConfidenceInterval cfDiff31ForCars = new ConfidenceInterval(
-				valuesDiff31ForCars, CONF_LEVEL);
-		ConfidenceInterval cfDiff41ForCars = new ConfidenceInterval(
-				valuesDiff41ForCars, CONF_LEVEL);
-
-		ConfidenceInterval cfDiff21ForTrains = new ConfidenceInterval(
-				valuesDiff21ForTrains, CONF_LEVEL);
-		ConfidenceInterval cfDiff31ForTrains = new ConfidenceInterval(
-				valuesDiff31ForTrains, CONF_LEVEL);
-		ConfidenceInterval cfDiff41ForTrains = new ConfidenceInterval(
-				valuesDiff41ForTrains, CONF_LEVEL);
 
 		ConfidenceInterval cfDiff21ForCosts = new ConfidenceInterval(
 				valuesDiff21ForCosts, CONF_LEVEL);
@@ -175,11 +147,9 @@ class SMThemeParkExperi2 {
 				valuesDiff41ForCosts, CONF_LEVEL);
 
 		TableHelper.printTable(cfDiff21ForCosts, cfDiff31ForCosts,
-				cfDiff41ForCosts, cfDiff21ForTrains, cfDiff31ForTrains,
-				cfDiff41ForTrains, cfDiff21ForCars, cfDiff31ForCars,
-				cfDiff41ForCars);
+				cfDiff41ForCosts);
 		
-		System.out.println("\nCase Results: \n");
+		System.out.println("\nCase Results (y(n)): \n");
 		for (int i = 0; i < 4; i++) {
 			ConfidenceInterval carsInterval = new ConfidenceInterval(
 					valuesCasesForCars[i], CONF_LEVEL), trainsInterval = new ConfidenceInterval(

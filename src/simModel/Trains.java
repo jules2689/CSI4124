@@ -7,7 +7,7 @@ public class Trains {
 	};
 
 	protected int numCars; // an integer value between 1 and 9 which represents the number of car
-	protected int numCustomers; // id matches station
+	protected int numCustomers; 
 	protected int[] numLeavingCustomers; // id matches station
 	StatusType status;
 
