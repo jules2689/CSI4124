@@ -10,14 +10,15 @@ import cern.jet.random.engine.*;
 // Main Method: Experiments
 // 
 class SMThemeParkExperi3 {
-	   // Confidence levels - first one is the overall confidence level. 
-	   // The other are Ck's and one more must be calculated to ensure the overall CF
-	public static double[] cfLevels = { 0.80, 0.99, 0.85 }; // TODO
+	// Confidence levels - first one is the overall confidence level.
+	// The other are Ck's and one more must be calculated to ensure the overall
+	// CF
+	public static double[] cfLevels = { 0.90, 0.99, 0.92 }; // TODO
 
 	public static void main(String[] args) {
 		double startTime = 0.0, endTime = 750.0;
 		SMThemePark park; // Simulation object
-		int NUMRUNS = 5000; // TODO needs modifying?
+		int NUMRUNS =30000; // TODO needs modifying?
 		int[] boardingOptions = new int[] { Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED, Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED }; // boarding options in
@@ -55,14 +56,14 @@ class SMThemeParkExperi3 {
 		double[] valuesDiff21ForCosts = new double[NUMRUNS];
 		double[] valuesDiff31ForCosts = new double[NUMRUNS];
 		double[] valuesDiff41ForCosts = new double[NUMRUNS];
-		
+
 		// Number of Seeds
 		for (int i = 0; i < NUMRUNS; i++) {
 			Seeds seed = sds[i];
 			// For Each Case Scenario Within Cars Within Trains
-			
-			System.out.println("Seed #"+(i+1) + " out of " + NUMRUNS);
-			
+
+			System.out.println("Seed #" + (i + 1) + " out of " + NUMRUNS);
+
 			// case 1
 			// For Each Train Scenario Within Seeds
 			traincarloop: for (int numTrains = Constants.MIN_NUMBER_OF_TRAINS; numTrains <= Constants.MAX_NUMBER_OF_TRAINS; numTrains++) {
@@ -171,40 +172,37 @@ class SMThemeParkExperi3 {
 				valuesCasesForCosts[2], confLevels[2]);
 		ConfidenceInterval cfDiff41ForCars2 = new ConfidenceInterval(
 				valuesCasesForCosts[3], confLevels[3]);
-		
+
 		ConfidenceInterval cfDiff21ForTrains = new ConfidenceInterval(
 				valuesDiff21ForTrains, confLevels[1]);
 		ConfidenceInterval cfDiff31ForTrains = new ConfidenceInterval(
 				valuesDiff31ForTrains, confLevels[2]);
 		ConfidenceInterval cfDiff41ForTrains = new ConfidenceInterval(
 				valuesDiff41ForTrains, confLevels[3]);
-		
+
 		ConfidenceInterval cfDiff21ForCosts = new ConfidenceInterval(
 				valuesDiff21ForCosts, confLevels[1]);
 		ConfidenceInterval cfDiff31ForCosts = new ConfidenceInterval(
 				valuesDiff31ForCosts, confLevels[2]);
 		ConfidenceInterval cfDiff41ForCosts = new ConfidenceInterval(
 				valuesDiff41ForCosts, confLevels[3]);
-		
+
 		TableHelper.printTable(cfDiff21ForCosts, cfDiff31ForCosts,
 				cfDiff41ForCosts, cfDiff21ForTrains, cfDiff31ForTrains,
 				cfDiff41ForTrains, cfDiff21ForCars, cfDiff31ForCars,
 				cfDiff41ForCars);
-		
+
 		System.out.println("\nCase Results: \n");
-		for (int i = 0; i < 4; i++){
+		for (int i = 0; i < 4; i++) {
 			ConfidenceInterval carsInterval = new ConfidenceInterval(
-					valuesCasesForCars[i], confLevels[i]),
-					trainsInterval = new ConfidenceInterval(
-							valuesCasesForTrains[i], confLevels[i]),
-							costsInterval = new ConfidenceInterval(
-									valuesCasesForCosts[i], confLevels[i]);
-			int cars = (int) carsInterval.getPointEstimate();
-			int trains = (int)trainsInterval.getPointEstimate();
-			int costs = (int) costsInterval.getPointEstimate();
-			System.out.println("Case " + (i+1) + " - Trains: "+ trains + " Cars: "+ cars + " - Cost: " + costs);
+					valuesCasesForCars[i], confLevels[i]), trainsInterval = new ConfidenceInterval(
+					valuesCasesForTrains[i], confLevels[i]);
+			int cars = (int) Math.ceil(carsInterval.getPointEstimate());
+			int trains = (int) Math.ceil(trainsInterval.getPointEstimate());
+			System.out.println("Case " + (i + 1) + " - Trains: " + trains
+					+ " Cars: " + cars);
 		}
-		
+
 	}
 
 	/*

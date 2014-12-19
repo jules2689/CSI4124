@@ -13,7 +13,7 @@ class SMThemeParkExperi2 {
 	public static void main(String[] args) {
 		double startTime = 0.0, endTime = 750.0;
 		SMThemePark park; // Simulation object
-		int NUMRUNS = 500;
+		int NUMRUNS = 30;
 		int[] boardingOptions = new int[] { Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED, Constants.SINGLE_SIDED,
 				Constants.DOUBLE_SIDED }; // boarding options in 4 cases
@@ -178,5 +178,16 @@ class SMThemeParkExperi2 {
 				cfDiff41ForCosts, cfDiff21ForTrains, cfDiff31ForTrains,
 				cfDiff41ForTrains, cfDiff21ForCars, cfDiff31ForCars,
 				cfDiff41ForCars);
+		
+		System.out.println("\nCase Results: \n");
+		for (int i = 0; i < 4; i++) {
+			ConfidenceInterval carsInterval = new ConfidenceInterval(
+					valuesCasesForCars[i], CONF_LEVEL), trainsInterval = new ConfidenceInterval(
+					valuesCasesForTrains[i], CONF_LEVEL);
+			int cars = (int) Math.ceil(carsInterval.getPointEstimate());
+			int trains = (int) Math.ceil(trainsInterval.getPointEstimate());
+			System.out.println("Case " + (i + 1) + " - Trains: " + trains
+					+ " Cars: " + cars);
+		}
 	}
 }
